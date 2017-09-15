@@ -1,0 +1,28 @@
+<launch>
+    <arg name="pkg_name" value="adafruit_imu"/>
+    <arg name="node_name" default="adafruit_imu_"/>
+
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="true"
+         doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman."/>
+
+    <group ns="$(arg veh)">
+
+        <!-- run local -->
+        <node if="$(arg local)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py"
+              output="screen">
+            
+        </node>
+
+        <!-- run remote -->
+        <node unless="$(arg local)" machine="$(arg veh)" name="$(arg node_name)" pkg="$(arg pkg_name)"
+              type="$(arg node_name).py" output="screen">
+            
+        </node>
+    </group>
+
+     <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_imu" 
+        args=" 0.05 0.05 0.0    0.0 0.0 0.0  /duckiebot /imu_link" />
+</launch>

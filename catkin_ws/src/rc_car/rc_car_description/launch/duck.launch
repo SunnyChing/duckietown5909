@@ -1,0 +1,17 @@
+<launch>
+    <arg name="robot_name"/>
+    <arg name="init_pose"/>
+
+  <arg name="model" />
+  <param name="duckiebot_description" 
+	 command="$(find xacro)/xacro.py '$(find rc_car_description)/urdf/rc_car.xacro'" />
+<node name="duckiebot_state_publisher" pkg="robot_state_publisher" type="state_publisher" >
+     	<remap from="robot_description" to="duckiebot_description" />
+	</node>
+  <node name="spawn_rc_car" pkg="gazebo_ros" type="spawn_model" 
+	args="$(arg init_pose) -urdf -param duckiebot_description -model $(arg robot_name)" 
+	respawn="false" output="screen" />
+
+<include file="$(find rc_car_control)/launch/rc_car_control.launch" />
+      <!--node name="rc_car_diffFB" pkg="rc_car_control" type="rc_car_diffFB" /-->
+</launch>

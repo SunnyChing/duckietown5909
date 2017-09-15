@@ -22,3 +22,11 @@ source $DUCKIETOWN_ROOT/catkin_ws/devel/setup.bash
 # TODO: run a python script that checks all libraries are installed
 
 exec "$@" #Passes arguments. Need this for ROS remote launching to work.
+#SUNNY
+#source set_ros_master.sh sunnybot
+source set_ros_master.sh tingbot
+#source set_vehicle_name.sh sunnybot
+source set_vehicle_name.sh tingbot
+export ROSLAUNCH_SSH_UNKNOWN=1
+echo "ROSLAUNCH_SSH_UNKNOWN"
+echo "------------------------------------"

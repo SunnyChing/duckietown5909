@@ -15,7 +15,13 @@
 
 namespace apriltags_ros{
 
-  AprilTagDetector::AprilTagDetector(ros::NodeHandle& nh, ros::NodeHandle& pnh): it_(nh){
+  //AprilTagDetector::AprilTagDetector(ros::NodeHandle& nh, ros::NodeHandle& pnh): it_(nh){
+    AprilTagDetector::AprilTagDetector(ros::NodeHandle& nh, ros::NodeHandle& pnh){  //SUNNY
+	 fx = -1;
+	 fy = -1;
+ 	px = -1;
+ 	py = -1;
+
     XmlRpc::XmlRpcValue april_tag_descriptions;
     if(!pnh.getParam("tag_descriptions", april_tag_descriptions)){
       ROS_WARN("No april tags specified");
@@ -31,12 +37,19 @@ namespace apriltags_ros{
     if(!pnh.getParam("sensor_frame_id", sensor_frame_id_)){
       sensor_frame_id_ = "";
     }
-    
+      if (!pnh.getParam("tf_prefix", tf_prefix_)){
+   tf_prefix_ = "";
+  }
+
+
     AprilTags::TagCodes tag_codes = AprilTags::tagCodes36h11;
     tag_detector_= boost::shared_ptr<AprilTags::TagDetector>(new AprilTags::TagDetector(tag_codes));
-    image_sub_ = it_.subscribeCamera("image_rect", 1, &AprilTagDetector::imageCb, this);
+    //image_sub_ = it_.subscribeCamera("image_rect", 1, &AprilTagDetector::imageCb, this);               //SUNNY
     switch_sub_ = nh.subscribe("switch",1,&AprilTagDetector::switchCB, this);
-    image_pub_ = it_.advertise("tag_detections_image", 1);
+    //image_pub_ = it_.advertise("tag_detections_image", 1);                                            //SUNNY
+    image_sub_ = nh.subscribe("image_rect", 1, &AprilTagDetector::imagePicture, this);                   //SUNNY
+    cam_info_ = nh.subscribe("camera_node/camera_info", 1, &AprilTagDetector::cam_info, this);                       //SUNNY
+    image_pub_ = nh.advertise<sensor_msgs::Image>("tag_detections_image", 1);
     detections_pub_ = nh.advertise<duckietown_msgs::AprilTagDetectionArray>("tag_detections", 1);
     pose_pub_ = nh.advertise<geometry_msgs::PoseArray>("tag_detections_pose", 1);
     on_switch=true;
@@ -49,7 +62,7 @@ namespace apriltags_ros{
     on_switch=switch_msg->data;
   }
   
-  void AprilTagDetector::imageCb(const sensor_msgs::ImageConstPtr& msg,const sensor_msgs::CameraInfoConstPtr& cam_info){
+/*  void AprilTagDetector::imageCb(const sensor_msgs::ImageConstPtr& msg,const sensor_msgs::CameraInfoConstPtr& cam_info){
     cv_bridge::CvImagePtr cv_ptr;
     try{
       cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
@@ -114,6 +127,91 @@ namespace apriltags_ros{
     pose_pub_.publish(tag_pose_array);
     image_pub_.publish(cv_ptr->toImageMsg());
   }
+*/
+/* //SUNNY */
+  void AprilTagDetector::cam_info(const sensor_msgs::CameraInfoConstPtr& cam_info){
+    
+       // use camera intrinsic focal length and principal point
+       // for backwards compatability
+       	fx = cam_info->K[0];
+        fy = cam_info->K[4];
+        px = cam_info->K[2];
+        py = cam_info->K[5];
+     
+  }
+
+  void AprilTagDetector::imagePicture(const sensor_msgs::ImageConstPtr& msg){
+   cv_bridge::CvImagePtr cv_ptr;
+   try{
+     cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+    }
+  catch (cv_bridge::Exception& e){
+    ROS_ERROR("cv_bridge exception: %s", e.what());
+     return;
+   }
+    cv::Mat gray;
+    cv::cvtColor(cv_ptr->image, gray, CV_BGR2GRAY);
+    std::vector<AprilTags::TagDetection>	detections = tag_detector_->extractTags(gray);
+    ROS_DEBUG("%d tag detected", (int)detections.size());
+
+ // Check if the camera info has been updated yet
+  if (fx ==-1 && fy ==-1 && px ==-1 && py ==-1){
+    ROS_WARN_THROTTLE(2.0, "Skipping Frame: Camera Info Not Yet Set");
+    return;
+  }
+
+
+    if(!sensor_frame_id_.empty())
+      cv_ptr->header.frame_id = sensor_frame_id_;
+
+    duckietown_msgs::AprilTagDetectionArray tag_detection_array;
+    geometry_msgs::PoseArray tag_pose_array;
+    tag_pose_array.header = cv_ptr->header;
+
+    BOOST_FOREACH(AprilTags::TagDetection detection, detections){
+      std::map<int, AprilTagDescription>::const_iterator description_itr = descriptions_.find(detection.id);
+      if(description_itr == descriptions_.end()){
+    ROS_WARN_THROTTLE(10.0, "Found tag: %d, but no description was found for it", detection.id);
+    continue;
+      }
+      AprilTagDescription description = description_itr->second;
+      double tag_size = description.size();
+
+      detection.draw(cv_ptr->image);
+      Eigen::Matrix4d transform = detection.getRelativeTransform(tag_size, fx, fy, px, py);
+      Eigen::Matrix3d rot = transform.block(0,0,3,3);
+      Eigen::Quaternion<double> rot_quaternion = Eigen::Quaternion<double>(rot);
+
+      geometry_msgs::PoseStamped tag_pose;
+      tag_pose.pose.position.x = transform(0,3);
+      tag_pose.pose.position.y = transform(1,3);
+      tag_pose.pose.position.z = transform(2,3);
+      tag_pose.pose.orientation.x = rot_quaternion.x();
+      tag_pose.pose.orientation.y = rot_quaternion.y();
+      tag_pose.pose.orientation.z = rot_quaternion.z();
+      tag_pose.pose.orientation.w = rot_quaternion.w();
+      tag_pose.header = cv_ptr->header;
+
+
+
+      
+      duckietown_msgs::AprilTagDetection tag_detection;
+      tag_detection.pose = tag_pose;
+      tag_detection.id = detection.id;
+      tag_detection.size = tag_size;
+      tag_detection_array.detections.push_back(tag_detection);
+      tag_pose_array.poses.push_back(tag_pose.pose);
+
+      tf::Stamped<tf::Transform> tag_transform;
+      tf::poseStampedMsgToTF(tag_pose, tag_transform);
+      tf_pub_.sendTransform(tf::StampedTransform(tag_transform, tag_transform.stamp_, tag_transform.frame_id_, tf_prefix_ +description.frame_name()));
+     //SUNNY
+    detections_pub_.publish(tag_detection_array);
+    pose_pub_.publish(tag_pose_array);
+    image_pub_.publish(cv_ptr->toImageMsg());
+    }
+
+ }
 
 
   std::map<int, AprilTagDescription> AprilTagDetector::parse_tag_descriptions(XmlRpc::XmlRpcValue& tag_descriptions){

@@ -12,5 +12,9 @@ sudo apt-get install ros-indigo-phidgets-drivers
 sudo apt-get install ros-indigo-imu-complementary-filter ros-indigo-imu-filter-madgwick
 
 # # scipy for lane-filter
-# sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
-# sudo pip install scipy --upgrade
+ sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
+ #sudo pip install scipy --upgrade
+
+
+#2017 version
+#sudo pip install frozendict

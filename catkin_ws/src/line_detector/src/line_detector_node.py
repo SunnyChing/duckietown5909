@@ -4,7 +4,7 @@ from cv_bridge import CvBridge, CvBridgeError
 from duckietown_msgs.msg import (AntiInstagramTransform, BoolStamped, Segment,
     SegmentList, Vector2D)
 from duckietown_utils.instantiate_utils import instantiate
-from duckietown_utils.jpg import image_cv_from_jpg
+from duckietown_utils.jpg import image_cv_from_jpg  #location:f23-LED/led_detection/include
 from geometry_msgs.msg import Point
 from sensor_msgs.msg import CompressedImage, Image
 from visualization_msgs.msg import Marker
@@ -71,7 +71,7 @@ class LineDetectorNode(object):
         self.top_cutoff = rospy.get_param('~top_cutoff')
 
         if self.detector is None:
-            c = rospy.get_param('~detector')
+            c = rospy.get_param('~detector')   #under src/duckietown/config/baseline/line_detector
             assert isinstance(c, list) and len(c) == 2, c
         
 #         if str(self.detector_config) != str(c):
@@ -96,7 +96,7 @@ class LineDetectorNode(object):
         # Start a daemon thread to process the image
         thread = threading.Thread(target=self.processImage,args=(image_msg,))
         thread.setDaemon(True)
-        thread.start()
+        thread.start()  #start execution
         # Returns rightaway
 
     def cbTransform(self, transform_msg):
@@ -130,7 +130,7 @@ class LineDetectorNode(object):
 
     def processImage_(self, image_msg):
 
-        self.stats.processed()
+        self.stats.processed() #print if processing first image
 
         if self.intermittent_log_now():
             self.intermittent_log(self.stats.info())
@@ -169,7 +169,7 @@ class LineDetectorNode(object):
         # Set the image to be detected
         self.detector.setImage(image_cv_corr)
 
-        # Detect lines and normals
+        # Detect lines color by color and normals
 
         white = self.detector.detectLines('white')
         yellow = self.detector.detectLines('yellow')

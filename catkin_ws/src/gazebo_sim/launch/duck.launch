@@ -1,0 +1,14 @@
+<launch>
+    <arg name="robot_name"/>
+    <arg name="init_pose"/>
+    <arg name="model" />
+  <param name="duckiebot_description" 
+	 command="$(find xacro)/xacro.py '$(find gazebo_sim)/urdf/duck.xacro'" />
+
+  <node name="spawn_duckie" pkg="gazebo_ros" type="spawn_model" 
+	args="$(arg init_pose) -urdf -param duckiebot_description -model $(arg robot_name)" 
+	respawn="false" output="screen" />
+
+<!--include file="$(find rc_car_control)/launch/rc_car_control.launch" />
+      <node name="rc_car_diffFB" pkg="rc_car_control" type="rc_car_diffFB" /-->
+</launch>

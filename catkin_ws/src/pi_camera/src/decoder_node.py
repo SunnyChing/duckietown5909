@@ -16,7 +16,7 @@ class DecoderNode(object):
         self.active = True
         self.bridge = CvBridge()
         
-        self.publish_freq = self.setupParam("~publish_freq",1.0)
+        self.publish_freq = self.setupParam("~publish_freq",5.0)
         self.publish_duration = rospy.Duration.from_sec(1.0/self.publish_freq)
         self.pub_raw = rospy.Publisher("~image/raw",Image,queue_size=1)
         self.last_stamp = rospy.Time.now()        

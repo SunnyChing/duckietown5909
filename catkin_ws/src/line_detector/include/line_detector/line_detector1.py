@@ -9,8 +9,8 @@ class LineDetectorHSV(Configurable, LineDetectorInterface):
     """ LineDetectorHSV """
 
     def __init__(self, configuration):
-        # Images to be processed
-        self.bgr = np.empty(0)
+        # Images to be processed #array
+        self.bgr = np.empty(0)  
         self.hsv = np.empty(0)
         self.edges = np.empty(0)
 
@@ -195,7 +195,7 @@ class LineDetectorHSV(Configurable, LineDetectorInterface):
 
     def setImage(self, bgr):
         self.bgr = np.copy(bgr)
-        self.hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+        self.hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV) #change to hsv format from bgr
         self.edges = self._findEdge(self.bgr)
   
     def getImage(self):

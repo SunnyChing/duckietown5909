@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [333.4197027086466, 0.0, 332.0514810801123, 0.0, 336.250211681135, 271.24130470391424,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: sunnybot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2683947900435848, 0.05168238104405035, 0.0012070933223893214, -0.0006405776802028249,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [229.3499298095703, 0.0, 327.9250568130501, 0.0, 0.0, 271.7044372558594, 287.74789429762313,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -76,7 +76,7 @@
         <xacro:tile rotation="90" type="straight" x="5" y="7"/>
         <xacro:tile rotation="90" type="turn" x="5" y="8"/>
        <!--Sunny add border--> 
-	<xacro:tile rotation="0" type="empty" x="0" y="-1"/>
+	<!--<xacro:tile rotation="0" type="empty" x="0" y="-1"/>
 	<xacro:tile rotation="0" type="empty" x="1" y="-1"/>
 	<xacro:tile rotation="0" type="empty" x="2" y="-1"/>
 	<xacro:tile rotation="0" type="empty" x="3" y="-1"/>
@@ -84,7 +84,7 @@
 	<xacro:tile rotation="0" type="empty" x="5" y="-1"/>
 	<xacro:tile rotation="0" type="empty" x="6" y="-1"/>
 	<xacro:tile rotation="0" type="empty" x="-1" y="0"/>
-
+-->
 
 	<!--Empty border tiles-->
        <xacro:tile visible="false" x="0" y="9"/>

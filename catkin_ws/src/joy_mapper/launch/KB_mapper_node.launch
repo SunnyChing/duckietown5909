@@ -6,10 +6,11 @@
 	<arg name="local" default="true" doc="true for running on laptop. false for running on vehicle."/>
 	<arg name="config" default="baseline" doc="Specify a config."/>
 	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman"/>
-
-<node if="$(arg local)" ns="$(arg veh)" pkg="$(arg pkg_name)" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen" clear_params="true" required="true"/>
-
+<!--
+<node if="$(arg local)" ns="$(arg veh)" pkg="$(arg pkg_name)" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen" clear_params="true" required="true"/>-->
+	
 	<!-- Run on local (laptop) -->
+	<remap from="$(arg node_name)/car_cmd" to="cmd_vel"/>
 	<node if="$(arg local)" ns="$(arg veh)" pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" clear_params="true" required="true">
 		<rosparam command="load" file="$(find duckietown)/config/$(arg config)/$(arg pkg_name)/$(arg node_name)/$(arg param_file_name).yaml"/>
 	</node>
@@ -19,7 +20,7 @@
 	<node unless="$(arg local)" ns="$(arg veh)" machine="$(arg veh)" pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" clear_params="true" required="true">
 		<rosparam command="load" file="$(find duckietown)/config/$(arg config)/$(arg pkg_name)/$(arg node_name)/$(arg param_file_name).yaml"/>
 	</node>	
-
+	
 	<!-- Subscribe Topics -->
 	<!-- "joy": sensor_msgs/Joy. The command read from joystick -->
 	<!-- Publish Topics -->

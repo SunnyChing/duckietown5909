@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import roslib; roslib.load_manifest('teleop_twist_keyboard')
 import rospy
-
+import numpy as np
 from geometry_msgs.msg import Twist
+from sensor_msgs.msg import Joy
 
 import sys, select, termios, tty
 
@@ -29,20 +30,22 @@ q/z : increase/decrease max speeds by 10%
 w/x : increase/decrease only linear speed by 10%
 e/c : increase/decrease only angular speed by 10%
 
+0:A ,1:B, 2:X, 3:Y, 4:lb, 5:rb, 6:back, 7:start, 8:logitech, 9:left joy, 10:right joy
+
 CTRL-C to quit
 """
-msgAuto='''
-switch to auto mode
+msgButtons='''
+Button
 '''
 moveBindings = {
-		'i':(0.8,0,0,0),
-		'o':(0.8,0,0,-1),
-		'j':(0,0,0,1),
-		'l':(0,0,0,-1),
-		'u':(0.8,0,0,1),
-		',':(-0.8,0,0,0),
-		'.':(-0.8,0,0,1),
-		'm':(-0.8,0,0,-1),
+		'i':(0,1,0,0,0,0,0,0),  #axes[1]=v, axes[3]=steering
+		'o':(0,1,0,-1,0,0,0,0),
+		'j':(0,0,0,1,0,0,0,0),
+		'l':(0,0,0,-1,0,0,0,0),
+		'u':(0,1,0,1,0,0,0,0),
+		',':(0,-1,0,0,0,0,0,0),
+		'.':(0,-1,0,0,1,0,0,0),
+		'm':(0,-1,0,0,-1,0,0,0),
 		'O':(1,-1,0,0),
 		'I':(1,0,0,0),
 		'J':(0,1,0,0),
@@ -63,8 +66,18 @@ speedBindings={
 		'e':(1,1.1),
 		'c':(1,.9),
 	      }
-autoBindings={
-		'a':(0,1),
+modeBindings={
+		'0':(1,0,0,0,0,0,0,0,0,0),		
+		'1':(0,1,0,0,0,0,0,0,0,0),
+		'2':(0,0,1,0,0,0,0,0,0,0),
+		'3':(0,0,0,1,0,0,0,0,0,0),
+		'4':(0,0,0,0,1,0,0,0,0,0),
+		'5':(0,0,0,0,0,1,0,0,0,0),
+		'6':(0,0,0,0,0,0,1,0,0,0),
+		'7':(0,0,0,0,0,0,0,1,0,0),
+		'8':(0,0,0,0,0,0,0,0,1,0),
+		'9':(0,0,0,0,0,0,0,0,0,1),
+		
 	     }
 
 def getKey():
@@ -81,10 +94,11 @@ def vels(speed,turn):
 if __name__=="__main__":
     	settings = termios.tcgetattr(sys.stdin)
 	
-	pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+	#pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+	pub_joy = rospy.Publisher('joy', Joy, queue_size = 1)
 	rospy.init_node('teleop_twist_keyboard')
 
-	speed = rospy.get_param("~speed", 0.4)
+	speed = rospy.get_param("~speed", 0.5)
 	turn = rospy.get_param("~turn", 1.0)
 	x = 0
 	y = 0
@@ -92,58 +106,64 @@ if __name__=="__main__":
 	th = 0
 	status = 0
 	flag=1
-
+	button_active=0
+	button_value=0
+	axe= [0,0,0,0,0,0,0,0]
+	button=[]
+	
 	try:
 		print msg
 		print vels(speed,turn)
 		while(1):
 			key = getKey()
 			if key in moveBindings.keys():
-				x = moveBindings[key][0]
-				y = moveBindings[key][1]
-				z = moveBindings[key][2]
-				th = moveBindings[key][3]
-				flag=1
+				x=moveBindings[key][1]
+				th=moveBindings[key][3]
+				button_active = [0,0,0,0,0,0,0,0,0,0]
+				print x
+				
 			elif key in speedBindings.keys():
 				speed = speed * speedBindings[key][0]
 				turn = turn * speedBindings[key][1]
-
 				print vels(speed,turn)
 				if (status == 14):
 					print msg
 				status = (status + 1) % 15
-				flag=1
-			elif key in autoBindings.keys():
-				flag=0 
-				print msgAuto
-				twist = Twist()
-				twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
-				twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
-				pub.publish(twist)
-							
-			else:
+				
+			elif key in modeBindings.keys():				 
+				button_active = modeBindings[key]
+				axe=[0,0,0,0,0,0,0,0]
 				x = 0
-				y = 0
-				z = 0
+				th = 0
+				print msgButtons, button_active
+				
+			else:
+				axe=[0,0,0,0,0,0,0,0]
+				button_active = [0,0,0,0,0,0,0,0,0,0]
+				x = 0
 				th = 0
 				if (key == '\x03'):
 					break
 
-			if (flag==1):
-				twist = Twist()
-				twist.linear.x = x*speed; twist.linear.y = y*speed; twist.linear.z = z*speed;
-				twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = th*turn
-				pub.publish(twist)
+			
+			
+			joy_msg =Joy()
+			joy_msg.axes=axe
+			joy_msg.axes[1]=x*speed
+			joy_msg.axes[3]=th*turn
+			joy_msg.buttons=button_active
+			pub_joy.publish(joy_msg)
+			print axe,x
+			
+	
 
-	except:
-		print e
 
 	finally:
-		twist = Twist()
-		twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
-		twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
-		pub.publish(twist)
-
+		
+		joy_msg =Joy()
+		joy_msg.axes=[0,0,0,0,0,0,0,0]
+		joy_msg.buttons=[0,0,0,0,0,0,0,0,0,0]
+		pub_joy.publish(joy_msg)
     		termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 
 

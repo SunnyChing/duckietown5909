@@ -12,7 +12,7 @@
 <gazebo>
   <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
     <robotNamespace>${veh}</robotNamespace>
-	<robotParam>duckiebot_description</robotParam>
+	<robotParam>${veh}_description</robotParam>
   </plugin>
 </gazebo>
 

@@ -402,157 +402,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        tile_-1_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-1_9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_-2_9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_0_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_0_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_0_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_0_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_0_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -596,28 +451,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_1_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_1_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_1_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_1_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_1_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -661,28 +500,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_2_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_2_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_2_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_2_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_2_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -726,28 +549,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_3_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_3_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_3_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_3_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_3_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -791,28 +598,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_4_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_4_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_4_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_4_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_4_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -856,28 +647,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_5_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_5_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_5_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         tile_5_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_5_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -921,137 +696,46 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_6_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_6_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_6_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_6_10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tile_6_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_4:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_5:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_6:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_7:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_8:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         tile_6_9:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        tile_7_-1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_-2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tile_7_9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         world:
           Alpha: 1
           Show Axes: false
@@ -1072,35 +756,7 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster_wheel_back:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        chassis:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_wheel:
+        duckiebot:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -1260,67 +916,9 @@ Visualization Manager:
           Value: false
         tag_9:
           Value: false
-        tile_-1_-1:
-          Value: false
-        tile_-1_-2:
-          Value: false
-        tile_-1_0:
-          Value: false
-        tile_-1_1:
-          Value: false
-        tile_-1_10:
-          Value: false
-        tile_-1_2:
-          Value: false
-        tile_-1_3:
-          Value: false
-        tile_-1_4:
-          Value: false
-        tile_-1_5:
-          Value: false
-        tile_-1_6:
-          Value: false
-        tile_-1_7:
-          Value: false
-        tile_-1_8:
-          Value: false
-        tile_-1_9:
-          Value: false
-        tile_-2_-1:
-          Value: false
-        tile_-2_-2:
-          Value: false
-        tile_-2_0:
-          Value: false
-        tile_-2_1:
-          Value: false
-        tile_-2_10:
-          Value: false
-        tile_-2_2:
-          Value: false
-        tile_-2_3:
-          Value: false
-        tile_-2_4:
-          Value: false
-        tile_-2_5:
-          Value: false
-        tile_-2_6:
-          Value: false
-        tile_-2_7:
-          Value: false
-        tile_-2_8:
-          Value: false
-        tile_-2_9:
-          Value: false
-        tile_0_-1:
-          Value: false
-        tile_0_-2:
-          Value: false
         tile_0_0:
           Value: false
         tile_0_1:
-          Value: false
-        tile_0_10:
           Value: false
         tile_0_2:
           Value: false
@@ -1338,15 +936,9 @@ Visualization Manager:
           Value: false
         tile_0_9:
           Value: false
-        tile_1_-1:
-          Value: false
-        tile_1_-2:
-          Value: false
         tile_1_0:
           Value: false
         tile_1_1:
-          Value: false
-        tile_1_10:
           Value: false
         tile_1_2:
           Value: false
@@ -1364,15 +956,9 @@ Visualization Manager:
           Value: false
         tile_1_9:
           Value: false
-        tile_2_-1:
-          Value: false
-        tile_2_-2:
-          Value: false
         tile_2_0:
           Value: false
         tile_2_1:
-          Value: false
-        tile_2_10:
           Value: false
         tile_2_2:
           Value: false
@@ -1390,15 +976,9 @@ Visualization Manager:
           Value: false
         tile_2_9:
           Value: false
-        tile_3_-1:
-          Value: false
-        tile_3_-2:
-          Value: false
         tile_3_0:
           Value: false
         tile_3_1:
-          Value: false
-        tile_3_10:
           Value: false
         tile_3_2:
           Value: false
@@ -1416,15 +996,9 @@ Visualization Manager:
           Value: false
         tile_3_9:
           Value: false
-        tile_4_-1:
-          Value: false
-        tile_4_-2:
-          Value: false
         tile_4_0:
           Value: false
         tile_4_1:
-          Value: false
-        tile_4_10:
           Value: false
         tile_4_2:
           Value: false
@@ -1442,15 +1016,9 @@ Visualization Manager:
           Value: false
         tile_4_9:
           Value: false
-        tile_5_-1:
-          Value: false
-        tile_5_-2:
-          Value: false
         tile_5_0:
           Value: false
         tile_5_1:
-          Value: false
-        tile_5_10:
           Value: false
         tile_5_2:
           Value: false
@@ -1468,15 +1036,9 @@ Visualization Manager:
           Value: false
         tile_5_9:
           Value: false
-        tile_6_-1:
-          Value: false
-        tile_6_-2:
-          Value: false
         tile_6_0:
           Value: false
         tile_6_1:
-          Value: false
-        tile_6_10:
           Value: false
         tile_6_2:
           Value: false
@@ -1494,44 +1056,6 @@ Visualization Manager:
           Value: false
         tile_6_9:
           Value: false
-        tile_7_-1:
-          Value: false
-        tile_7_-2:
-          Value: false
-        tile_7_0:
-          Value: false
-        tile_7_1:
-          Value: false
-        tile_7_10:
-          Value: false
-        tile_7_2:
-          Value: false
-        tile_7_3:
-          Value: false
-        tile_7_4:
-          Value: false
-        tile_7_5:
-          Value: false
-        tile_7_6:
-          Value: false
-        tile_7_7:
-          Value: false
-        tile_7_8:
-          Value: false
-        tile_7_9:
-          Value: false
-        tingbot/base_footprint:
-          Value: false
-        tingbot/base_link:
-          Value: true
-        tingbot/camera_link:
-          Value: false
-        tingbot/caster_wheel_back:
-          Value: false
-        tingbot/chassis:
-          Value: false
-        tingbot/odom:
-          Value: true
         world:
           Value: true
       Marker Scale: 1
@@ -1541,68 +1065,10 @@ Visualization Manager:
       Show Names: false
       Tree:
         world:
-          tile_-1_-1:
-            {}
-          tile_-1_-2:
-            {}
-          tile_-1_0:
-            {}
-          tile_-1_1:
-            {}
-          tile_-1_10:
-            {}
-          tile_-1_2:
-            {}
-          tile_-1_3:
-            {}
-          tile_-1_4:
-            {}
-          tile_-1_5:
-            {}
-          tile_-1_6:
-            {}
-          tile_-1_7:
-            {}
-          tile_-1_8:
-            {}
-          tile_-1_9:
-            {}
-          tile_-2_-1:
-            {}
-          tile_-2_-2:
-            {}
-          tile_-2_0:
-            {}
-          tile_-2_1:
-            {}
-          tile_-2_10:
-            {}
-          tile_-2_2:
-            {}
-          tile_-2_3:
-            {}
-          tile_-2_4:
-            {}
-          tile_-2_5:
-            {}
-          tile_-2_6:
-            {}
-          tile_-2_7:
-            {}
-          tile_-2_8:
-            {}
-          tile_-2_9:
-            {}
-          tile_0_-1:
-            {}
-          tile_0_-2:
-            {}
           tile_0_0:
             tag_5:
               {}
           tile_0_1:
-            {}
-          tile_0_10:
             {}
           tile_0_2:
             tag_33:
@@ -1635,16 +1101,10 @@ Visualization Manager:
           tile_0_9:
             tag_8:
               {}
-          tile_1_-1:
-            {}
-          tile_1_-2:
-            {}
           tile_1_0:
             tag_14:
               {}
           tile_1_1:
-            {}
-          tile_1_10:
             {}
           tile_1_2:
             tag_28:
@@ -1670,17 +1130,11 @@ Visualization Manager:
           tile_1_9:
             tag_15:
               {}
-          tile_2_-1:
-            {}
-          tile_2_-2:
-            {}
           tile_2_0:
             {}
           tile_2_1:
             tag_18:
               {}
-          tile_2_10:
-            {}
           tile_2_2:
             tag_113:
               {}
@@ -1706,10 +1160,6 @@ Visualization Manager:
             {}
           tile_2_9:
             {}
-          tile_3_-1:
-            {}
-          tile_3_-2:
-            {}
           tile_3_0:
             tag_30:
               {}
@@ -1718,8 +1168,6 @@ Visualization Manager:
           tile_3_1:
             tag_9:
               {}
-          tile_3_10:
-            {}
           tile_3_2:
             tag_24:
               {}
@@ -1754,10 +1202,6 @@ Visualization Manager:
               {}
             tag_64:
               {}
-          tile_4_-1:
-            {}
-          tile_4_-2:
-            {}
           tile_4_0:
             tag_36:
               {}
@@ -1766,8 +1210,6 @@ Visualization Manager:
           tile_4_1:
             tag_35:
               {}
-          tile_4_10:
-            {}
           tile_4_2:
             {}
           tile_4_3:
@@ -1796,15 +1238,9 @@ Visualization Manager:
               {}
             tag_66:
               {}
-          tile_5_-1:
-            {}
-          tile_5_-2:
-            {}
           tile_5_0:
             {}
           tile_5_1:
-            {}
-          tile_5_10:
             {}
           tile_5_2:
             {}
@@ -1827,18 +1263,12 @@ Visualization Manager:
           tile_5_9:
             tag_11:
               {}
-          tile_6_-1:
-            {}
-          tile_6_-2:
-            {}
           tile_6_0:
             tag_123:
               {}
           tile_6_1:
             tag_19:
               {}
-          tile_6_10:
-            {}
           tile_6_2:
             tag_25:
               {}
@@ -1859,32 +1289,6 @@ Visualization Manager:
           tile_6_9:
             tag_116:
               {}
-          tile_7_-1:
-            {}
-          tile_7_-2:
-            {}
-          tile_7_0:
-            {}
-          tile_7_1:
-            {}
-          tile_7_10:
-            {}
-          tile_7_2:
-            {}
-          tile_7_3:
-            {}
-          tile_7_4:
-            {}
-          tile_7_5:
-            {}
-          tile_7_6:
-            {}
-          tile_7_7:
-            {}
-          tile_7_8:
-            {}
-          tile_7_9:
-            {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -1911,7 +1315,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 9.10105
+      Distance: 6.7295
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
@@ -1923,10 +1327,10 @@ Visualization Manager:
         Z: -0.858054
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: -0.0302033
+      Pitch: 0.609797
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.215406
+      Yaw: 4.6536
     Saved: ~
 Window Geometry:
   Displays:
@@ -1945,4 +1349,4 @@ Window Geometry:
     collapsed: true
   Width: 1535
   X: 49
-  Y: 146
+  Y: 136

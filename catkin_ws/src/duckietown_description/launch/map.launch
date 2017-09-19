@@ -5,7 +5,7 @@
     <arg name="map_name" default="lab5916_map_3bound" doc="The name of the xacro file with the duckietown map "/>
     <arg name="gui" default="true" /> <!--rviz-->
     <arg name="rviz_config" default="rviz_default"/>
-    <arg name="init_pose" value="-x 0 -y 0 -z 0" />
+    <arg name="init_pose" value="-x 1.5 -y 1.6 -z 0" />
     <arg name="gazebo" value="true" />
      <group ns="$(arg veh)">
         <node if="$(arg gui)" name="rviz" pkg="rviz" type="rviz" args="-d $(find duckietown_description)/rviz/$(arg rviz_config).rviz" />

@@ -7,7 +7,7 @@
 
     <include file="$(find duckietown)/machines"/>
     <!-- KB joy -->
-<node if="$(arg local)" ns="$(arg veh)" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen" clear_params="true" required="true"/>
+<node if="$(arg local)" ns="$(arg veh)" pkg="joy_mapper" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen" clear_params="true" required="true"/>
    
 	 <!-- joy_mapper -->
     <include file="$(find joy_mapper)/launch/KB_mapper_node.launch">
@@ -18,7 +18,7 @@
     </include>
 
     <!-- run inverse_kinematics_node -->
-    <remap from="inverse_kinematics_node/car_cmd" to="KB_mapper_node/car_cmd"/>
+    <remap from="inverse_kinematics_node/car_cmd" to="keyboard_mapper_node/car_cmd"/>
     <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
     <include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
         <arg name="veh" value="$(arg veh)"/>
@@ -33,7 +33,7 @@
 					 <arg name="local" value="$(arg local)"/>
 				</include>
 
-    <!-- run forward_kinematics_node -->
+    <!-- run forward_kinematics_node -->   ---- need wheel drive to be complete
     <remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
     <include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
         <arg name="veh" value="$(arg veh)"/>
@@ -50,7 +50,7 @@
     </include>
 
     <!-- Wheels Driver -->
-   <!-- <include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+   <include file="$(find dagu_car)/launch/wheels_driver_node.launch">
         <arg name="veh" value="$(arg veh)"/>
-    </include>-->
+    </include>
 </launch>

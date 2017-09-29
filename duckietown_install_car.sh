@@ -15,6 +15,8 @@ sudo apt-get install ros-indigo-imu-complementary-filter ros-indigo-imu-filter-m
  sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
  #sudo pip install scipy --upgrade
 
+#for line detector 
+#sudo apt-get install python-sklearn
 
 #2017 version
 #sudo pip install frozendict

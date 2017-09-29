@@ -4,10 +4,11 @@
 	<arg name="veh" default="$(env VEHICLE_NAME)"/>
 	<arg name="config" default="baseline" />
 	<arg name="param_file_name" default="default" />
+	<arg name="param_file_name_kb" default="default_gazebo" />
 	<arg name="apriltags_param_file_name" default="$(arg param_file_name)" />
-	<arg name="fsm_file_name" default="default" />
+	<arg name="fsm_file_name" default="default_gazebo" />
 	<arg name="visualization" default="true" />
-	<arg name="verbose" default="false" />
+	<arg name="verbose" default="true" />
 	<arg name="statistics" default="false"/>
 	<arg name="map_name" default="duckietown_map"/>
 	<arg name="anti_instagram" default="true"/>
@@ -62,11 +63,11 @@
 	<arg name="/apriltags/local" default="false" />
 
 
-	<arg name="LED" default="true" />
+	<arg name="LED" default="false" />
 	<arg name="/LED/pattern_switch" default="false" />
 	<arg name="/LED/detector" default="false" />
 	<arg name="/LED/joystick" default="false" />
-	<arg name="/LED/emitter"  default="true" />
+	<arg name="/LED/emitter"  default="false" />
 	<arg name="/LED/interpreter" default="false" />
 
 	<arg name="odometry_learning" default="false"/>
@@ -91,7 +92,7 @@
 
 	<arg name="localization" default="false"/>
 	<arg name="/localization/local" default="false" />
-	<arg name="/localization/map_name" default="map59" />
+	<arg name="/localization/map_name" default="map5909" />
 	<arg name="/localization/gui" default="false"/>
 
 	<!-- end switch args -->
@@ -99,32 +100,28 @@
 	<!-- Enable statistics -->
 	<param name="enable_statistics" value="$(arg statistics)"/>
 
+	
 	<!-- Start Camera -->  
 	<group if="$(arg camera)">
-		<include  file="$(find pi_camera)/launch/camera_node_gazebo.launch">
-			<arg name="veh" value="$(arg veh)"/>
-			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>
-		</include>
+		
+
+			<!-- decoder_node -->
+		<group if="$(arg /camera/raw)">
+			<remap from="decoder_node/compressed_image" to="camera_node/image/compressed"/>
+			<remap from="decoder_node/image/raw" to="camera_node/image/raw"/>
+			<include file="$(find pi_camera)/launch/decoder_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="$(arg /camera/local)" />
+			</include>
+               </group>
 
 		<!-- cam_info_reader_node -->
 		<group if="$(arg /camera/cam_info)">
 			<remap from="cam_info_reader_node/camera_info" to="camera_node/camera_info"/>
 			<remap from="cam_info_reader_node/compressed_image" to="camera_node/image/compressed"/>
 			<include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
-				<arg name="veh" value="$(arg veh)"/>
-				<arg name="config" value="$(arg config)"/>
-				<arg name="param_file_name" value="$(arg param_file_name)"/>
-			</include>
-		</group>
-
-
-		<group if="$(arg /camera/raw)">
-
-			<!-- decoder_node -->
-			<remap from="decoder_node/compressed_image" to="camera_node/image/compressed"/>
-			<remap from="decoder_node/image/raw" to="camera_node/image/raw"/>
-			<include file="$(find pi_camera)/launch/decoder_node.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
@@ -139,7 +136,7 @@
 				<arg name="local" value="$(arg /camera/local)" />
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
-                <arg name="cali_file_name" value="$(arg veh)_rect" />
+                              <!--arg name="cali_file_name" value="$(arg veh)_rect" /-->    -----bmqm
 				<arg name="node_name" value="raw_cam_info_reader_node" />
 				<arg name="image_type" value="raw" />
 			</include>
@@ -160,16 +157,18 @@
 
 	<!-- Start Wheels -->
 	<group if="$(arg wheels)">
-
-	    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
 		<remap from="inverse_kinematics_node/car_cmd" to="car_cmd_switch_node/cmd"/>
+	    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />	
 		<include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
+			<arg name="local" value="true"/>   +++++++++++++++++++
+            <arg name="config" value="$(arg config)"/>
 		</include>
-		<remap from="forward_kinematics2gazebo_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
-				<include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
+		<remap from="forward_kinematics2gazebo_node/wheels_cmd" to="inverse_kinematics_node/wheels_cmd" />
+				<include file="$(find dagu_car)/launch/forward_kinematics2gazebo_node.launch">
 					<arg name="veh" value="$(arg veh)"/>
 					<arg name="config" value="$(arg config)"/>
+					 <arg name="local" value="true"/>
 				</include>
 
 		<!-- Wheel Driver --> --Gazebo 
@@ -194,7 +193,7 @@
 				<include file="$(find dagu_car)/launch/velocity_to_pose_node.launch">
 					<arg name="veh" value="$(arg veh)"/>
 					<arg name="config" value="$(arg config)"/>
-				</include>
+				</include>        
 		</group>
 	</group>
 
@@ -202,15 +201,17 @@
 	<!-- Start Joystick -->
 	<group if="$(arg joystick)">
 		<!-- joy -->
-		<include file="$(find joy_mapper)/launch/joy_node.launch">
+		<include file="$(find joy_mapper)/launch/KB_teleop.launch">   ~change from joy_node.launch to KB_teleop.launch
 			<arg name="veh" value="$(arg veh)"/>
+	                <arg name="local" default="true"/>    +++++++++++++
 			<arg name="config" value="$(arg config)"/>
 			<arg name="param_file_name" value="$(arg param_file_name)"/>
 		</include>
 
 		<!-- joy_mapper -->
-		<include file="$(find joy_mapper)/launch/joy_mapper_node.launch">
+		<include file="$(find joy_mapper)/launch/KB_mapper_node.launch">   ~change from joy_mapper_node.launch to KB_mapper_node.launch
 			<arg name="veh" value="$(arg veh)"/>
+	                <arg name="local" default="true"/>    +++++++++++++
 			<arg name="config" value="$(arg config)"/>
 			<arg name="param_file_name" value="$(arg param_file_name)"/>
 		</include>
@@ -221,10 +222,11 @@
 	<group if="$(arg fsm)">
 		<!-- FSM -->
 		<!-- no remapping for FSM - full topic names specified in params yaml -->
-		<include file="$(find fsm)/launch/fsm_node.launch">
+		<include file="$(find fsm)/launch/fsm_node_gazebo.launch">
 			<arg name="veh" value="$(arg veh)"/>        
 			<arg name="config" value="$(arg config)"/>        
-			<arg name="param_file_name" value="$(arg fsm_file_name)"/>        
+			<arg name="param_file_name" value="$(arg fsm_file_name)"/>       
+ 			<arg name="local" value="true"/>    +++++++++++++     
 		</include>
 
 		<!-- car_cmd_switch_node -->
@@ -233,13 +235,15 @@
 		<include file="$(find dagu_car)/launch/car_cmd_switch_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>
+			<arg name="param_file_name" value="$(arg param_file_name_kb)"/>
+ 			<arg name="local" value="true"/>    +++++++++++++     
 		</include>
 
 		<include file="$(find fsm)/launch/logic_gate_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>
+			<arg name="param_file_name" value="$(arg param_file_name_kb)"/>
+ 			<arg name="local" value="true"/>    +++++++++++++     
 		</include>
 	</group>
 
@@ -258,6 +262,8 @@
 				<!-- NOTE: "line_detector_param_file_name" as special case -->
 				<arg name="param_file_name" value="$(arg line_detector_param_file_name)"/>
 				<arg name="verbose" value="$(arg verbose)" />
+				<arg name="local" value="true"/>    ++++++++++++
+				
 			</include>	
 		</group>
 		
@@ -267,6 +273,7 @@
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>    ++++++++++++
 			</include>
 			<group if="$(arg visualization)">
 			  <remap from="duckiebot_visualizer/segment_list" to="ground_projection/lineseglist_out"/>
@@ -283,6 +290,7 @@
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>    ++++++++++++
 			</include>
 		</group>
 
@@ -295,23 +303,26 @@
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>    ++++++++++++
 			</include>
 		</group>
 
 		<!-- Lane controller -->
 		<group if="$(arg /lane_following/lane_controller)">
 			<remap from="lane_controller_node/lane_pose" to="lane_filter_node/lane_pose"/>
-			<include file="$(find lane_control)/launch/lane_controller_node.launch">
+			<include file="$(find lane_control)/launch/lane_controller_node_gazebo.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
-				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/> 
+				<arg name="local" value="true"/>    ++++++++++++
 			</include>
 		</group>
 
 		<!-- Visualization -->
 		<group if="$(arg visualization)">
 			<include file="$(find lane_filter)/launch/lane_pose_visualizer_node.launch">
-				<arg name="veh" value="$(arg veh)"/>		
+				<arg name="veh" value="$(arg veh)"/>	
+				<arg name="local" value="true"/>    ++++++++++++	
 			</include>
 		</group>
 
@@ -495,7 +506,8 @@
 		<include file="$(find veh_coordinator)/launch/simple_coordinator_node.launch">
 			<arg name="veh" value="$(arg veh)"/>        
 			<arg name="config" value="$(arg config)"/>        
-			<arg name="param_file_name" value="$(arg param_file_name)"/>    
+			<arg name="param_file_name" value="$(arg param_file_name)"/>  
+  			<arg name="local" value="true"/>     +++++++    
             <arg name="intersectionType" value="$(arg intersectionType)" />    
 		</include>
 	</group>
@@ -506,7 +518,8 @@
 	  <include file="$(find veh_coordinator)/launch/fake_coordinator_node.launch">
 	    <arg name="veh" value="$(arg veh)"/>        
 	    <arg name="config" value="$(arg config)"/>        
-	    <arg name="param_file_name" value="$(arg param_file_name)"/>        
+	    <arg name="param_file_name" value="$(arg param_file_name)"/>
+  	    <arg name="local" value="true"/>     +++++++            
 	  </include>
 	  <!-- Extra Remapping to make the fake coordination car cmds look real -->
 	  <remap from="fake_coordinator_node/car_cmd" to="simple_coordinator_node/car_cmd"/>
@@ -526,7 +539,8 @@
 			<include file="$(find intersection_control)/launch/open_loop_intersection_controller_node.launch">
 				<arg name="veh" value="$(arg veh)"/>        
 				<arg name="config" value="$(arg config)"/>        
-				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/>   
+				<arg name="local" value="true"/>        +++++++++++++     
 			</include>
 		</group>
 
@@ -538,7 +552,8 @@
 			<include file="$(find navigation)/launch/sr_turns_node.launch">
 				<arg name="veh" value="$(arg veh)"/>        
 				<arg name="config" value="$(arg config)"/>        
-				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/> 
+				<arg name="local" value="true"/>        +++++++++++++            
 			</include>
 		</group>
 
@@ -563,13 +578,15 @@
 				<arg name="map_name" value="$(arg map_name)"/>        
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>        
-				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/> 
+				<arg name="local" value="true"/>        +++++++++++++                   
 			</include>
 
 	        	<include file="$(find navigation)/launch/actions_dispatcher_node.launch">
  				<arg name="veh" value="$(arg veh)"/>        
 				<arg name="config" value="$(arg config)"/>        
-				<arg name="param_file_name" value="$(arg fsm_file_name)"/>        
+				<arg name="param_file_name" value="$(arg fsm_file_name)"/>    
+				<arg name="local" value="true"/>        +++++++++++++                       
         		</include>
 		</group>
 		
@@ -590,12 +607,12 @@
 		<include file="$(find parallel_autonomy)/launch/lane_supervisor_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			<arg name="param_file_name" value="$(arg param_file_name_kb)"/>        
 		</include>
 		<include file="$(find parallel_autonomy)/launch/intersection_supervisor_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			<arg name="param_file_name" value="$(arg param_file_name_kb)"/>        
 		</include>
 	</group>
 	<!-- End Parallel Autonomy -->

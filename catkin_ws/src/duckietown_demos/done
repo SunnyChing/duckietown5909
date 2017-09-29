@@ -1,0 +1,5 @@
+modules already done 
+$ roslaunch duckietown_demos localization_navigation_gazebo.launch veh:=tingbot
+$ roslaunch duckietown_demos lane_following_gazebo.launch veh:=tingbot
+$ roslaunch duckietown_demos joystick.launch veh:=tingbot
+

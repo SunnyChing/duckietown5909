@@ -19,7 +19,7 @@ class graph_search_server():
         # Loading map
         self.script_dir = os.path.dirname(__file__)
         self.map_path = self.script_dir + '/maps/' + self.map_name
-        self.map_img = self.script_dir + '/maps/map.png'
+        self.map_img = self.script_dir + '/maps/lab5916_map.png'    #map.png
 
         gc = graph_creator()
         self.duckietown_graph = gc.build_graph_from_csv(csv_filename=self.map_name)
@@ -64,11 +64,11 @@ class graph_search_server():
 
     def prepImage(self, cv_image):
         map_img = cv2.imread(self.map_img, cv2.CV_LOAD_IMAGE_COLOR)
-        map_crop = map_img[16:556,29:408,:]
-        map_resize = cv2.resize(map_crop,(cv_image.shape[1],955),interpolation=cv2.INTER_AREA)
-        cv_image = cv_image[0:955,:,:]
-        cv_image = 255 - cv_image                                                                                                                                                                            
-        overlay = cv2.addWeighted(cv_image,0.65,map_resize,0.35,0)                                                                                                                                             
+        map_crop = map_img[16:505,29:408,:]    #16:556:29:408
+        map_resize = cv2.resize(map_crop,(cv_image.shape[1],866),interpolation=cv2.INTER_AREA)   #955
+        cv_image = cv_image[0:866,:,:]    #0:955
+        cv_image = 255 -cv_image      
+        overlay = cv2.addWeighted(cv_image,0.65,map_resize,0.35,0)    
         overlay = cv2.resize(overlay,(0,0),fx=0.9,fy=0.9,interpolation=cv2.INTER_AREA) 
         overlay *= 1.4
         return overlay

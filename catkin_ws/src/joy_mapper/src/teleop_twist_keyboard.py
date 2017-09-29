@@ -115,12 +115,14 @@ if __name__=="__main__":
 		print msg
 		print vels(speed,turn)
 		while(1):
+			time_stamp = rospy.Time.now()
+			print time_stamp
 			key = getKey()
 			if key in moveBindings.keys():
 				x=moveBindings[key][1]
 				th=moveBindings[key][3]
 				button_active = [0,0,0,0,0,0,0,0,0,0]
-				print x
+				
 				
 			elif key in speedBindings.keys():
 				speed = speed * speedBindings[key][0]
@@ -135,7 +137,7 @@ if __name__=="__main__":
 				axe=[0,0,0,0,0,0,0,0]
 				x = 0
 				th = 0
-				print msgButtons, button_active
+				print msgButtons
 				
 			else:
 				axe=[0,0,0,0,0,0,0,0]
@@ -148,12 +150,13 @@ if __name__=="__main__":
 			
 			
 			joy_msg =Joy()
+			joy_msg.header.stamp=time_stamp
 			joy_msg.axes=axe
 			joy_msg.axes[1]=x*speed
 			joy_msg.axes[3]=th*turn
 			joy_msg.buttons=button_active
 			pub_joy.publish(joy_msg)
-			print axe,x
+			print axe
 			
 	
 
@@ -161,6 +164,7 @@ if __name__=="__main__":
 	finally:
 		
 		joy_msg =Joy()
+		joy_msg.header.stamp=time_stamp
 		joy_msg.axes=[0,0,0,0,0,0,0,0]
 		joy_msg.buttons=[0,0,0,0,0,0,0,0,0,0]
 		pub_joy.publish(joy_msg)

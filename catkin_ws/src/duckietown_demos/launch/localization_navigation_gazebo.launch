@@ -1,0 +1,41 @@
+<launch>                                                                                                                                                                                                     
+        <arg name="veh" default="$(env VEHICLE_NAME)"/>
+	<!--arg name="local" value="true"/-->    ++++++++++++ can't use the outside one??
+    <!-- start basic args -->
+    <include file="$(find duckietown_demos)/launch/master_gazebo.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="fsm_file_name" value="default_gazebo" />
+	<arg name="param_file_name_kb" value="default_gazebo" />
+        <arg name="map_name" value="lab5916_tiles" />
+        <arg name="visualization" value="false" />
+
+        <arg name="navigation" value="true"/>
+        <arg name="/navigation/apriltags_random" value="false"/>
+        <arg name="/navigation/graph_planner" value="true"/>
+
+        <arg name="/camera/local" value="true"/>  
+        <arg name="/camera/raw" value="true"/>
+        <arg name="/camera/raw/rect" value="true"/>  
+
+        <arg name="/lane_following/line_detection" value="true"/>
+        <arg name="/lane_following/ground_projection" value="true"/>
+        <arg name="/lane_following/lane_filter" value="true"/>
+        <arg name="/lane_following/stop_line_filter" value="true"/>
+
+        <arg name="apriltags" value="true"/>
+        <arg name="/apriltags/local" value="true"/>
+
+        <arg name="localization" value="true"/>
+        <arg name="/localization/local" value="true"/>
+        <arg name="/localization/gui" value="true"/>    --true for running rviz
+        <arg name="/localization/map_name" value="lab5916_map"/>
+
+	<arg name="odometry" value="false"/>  ++++ for navigation(forward_kinematics2gazebo_node) 
+	<arg name="/odometry/forward_kinematics" value="false"/> ++++ same reason above
+        <arg name="wheels" value="true" />   -- false for cmd2gazebo (lane_following)
+        <!--arg name="fsm" value="false" /-->   --true for fsm
+        <arg name="anti_instagram" value="false" />   ++++++++++
+	<arg name="LED" value="false"/>
+
+    </include>
+</launch>

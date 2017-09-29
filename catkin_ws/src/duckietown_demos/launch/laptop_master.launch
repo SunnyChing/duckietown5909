@@ -102,7 +102,7 @@
 
 	<!-- Start USB Camera -->
 	<group if="$(arg camera)">
-		<remap from="usb_camera_node/image_raw/compressed" to="camera_node/image/compressed"/>
+		<remap from="usb_cam/image_raw/compressed" to="camera_node/image/compressed"/>
 		<include file="$(find usb_cam)/launch/usb_camera_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 		</include>

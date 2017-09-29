@@ -4,5 +4,11 @@ In this repository we will collect all the software, middleware, drivers, ROS mo
 
 The activity in this repo should be posted automatically to the channel #bot-github.
 
+author: MIT
+editor: IISlab5909
+
+1. duckietown experiment
+2. gazebo simulation
+3. odroid version(unfinish)
 -----
 

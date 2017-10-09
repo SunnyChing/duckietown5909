@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 
 	ros::init(argc, argv, "odom_subscriber");
 	ros::NodeHandle n;
-	ros::Subscriber sub = n.subscribe("odom", 1000, odom_ck); //no odom publish
+	ros::Subscriber sub = n.subscribe("/odom", 1, odom_ck); //no odom publish
 
 	tf::TransformBroadcaster broadcaster;
 	ros::Rate loop_rate(20);
@@ -36,8 +36,8 @@ int main(int argc, char** argv) {
 	while (ros::ok()) {
 
 
-		odom_trans.header.frame_id = "odom";
-		odom_trans.child_frame_id = "base_footprint";
+		odom_trans.header.frame_id = "/tingbot/odom";
+		odom_trans.child_frame_id = "/tingbot/base_footprint";
 		
 		// publishing the odometry and the new tf
 		broadcaster.sendTransform(odom_trans);

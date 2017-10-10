@@ -93,7 +93,7 @@ class ForwardKinematicsNode(object):
         # Stuff the v and omega into a message and publish
         msg_velocity = Twist()
         msg_velocity.linear.x = v
-        msg_velocity.angular.z = omega/3
+        msg_velocity.angular.z = omega
         self.pub_velocity.publish(msg_velocity)
 
     def setup_parameter(self, param_name, default_value):

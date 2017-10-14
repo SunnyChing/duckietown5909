@@ -9,8 +9,7 @@ Panels:
         - /Duckietown Map1
         - /Duckiebot1
         - /TF1
-        - /TF1/Frames1
-      Splitter Ratio: 0.55496
+      Splitter Ratio: 0.589744
     Tree Height: 395
   - Class: rviz/Selection
     Name: Selection
@@ -30,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: Image
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -749,644 +748,41 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        duckiebot:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: Duckiebot
       Robot Description: duckiebot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /sign_highlights
       Name: Detected Signs
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        duckiebot:
-          Value: true
-        tag_1:
-          Value: false
-        tag_109:
-          Value: false
-        tag_11:
-          Value: false
-        tag_110:
-          Value: false
-        tag_111:
-          Value: false
-        tag_112:
-          Value: false
-        tag_113:
-          Value: false
-        tag_114:
-          Value: false
-        tag_115:
-          Value: false
-        tag_116:
-          Value: false
-        tag_117:
-          Value: false
-        tag_118:
-          Value: false
-        tag_119:
-          Value: false
-        tag_12:
-          Value: false
-        tag_120:
-          Value: false
-        tag_121:
-          Value: false
-        tag_122:
-          Value: false
-        tag_123:
-          Value: false
-        tag_124:
-          Value: false
-        tag_13:
-          Value: false
-        tag_14:
-          Value: false
-        tag_15:
-          Value: false
-        tag_16:
-          Value: false
-        tag_17:
-          Value: false
-        tag_18:
-          Value: false
-        tag_19:
-          Value: false
-        tag_20:
-          Value: false
-        tag_21:
-          Value: false
-        tag_22:
-          Value: false
-        tag_23:
-          Value: false
-        tag_24:
-          Value: false
-        tag_25:
-          Value: false
-        tag_26:
-          Value: false
-        tag_28:
-          Value: false
-        tag_30:
-          Value: false
-        tag_31:
-          Value: false
-        tag_32:
-          Value: false
-        tag_33:
-          Value: false
-        tag_35:
-          Value: false
-        tag_36:
-          Value: false
-        tag_38:
-          Value: false
-        tag_39:
-          Value: false
-        tag_4:
-          Value: false
-        tag_41:
-          Value: false
-        tag_49:
-          Value: false
-        tag_5:
-          Value: false
-        tag_51:
-          Value: false
-        tag_52:
-          Value: false
-        tag_53:
-          Value: false
-        tag_57:
-          Value: false
-        tag_58:
-          Value: false
-        tag_6:
-          Value: false
-        tag_60:
-          Value: false
-        tag_61:
-          Value: false
-        tag_62:
-          Value: false
-        tag_63:
-          Value: false
-        tag_64:
-          Value: false
-        tag_65:
-          Value: false
-        tag_66:
-          Value: false
-        tag_67:
-          Value: false
-        tag_68:
-          Value: false
-        tag_7:
-          Value: false
-        tag_70:
-          Value: false
-        tag_71:
-          Value: false
-        tag_72:
-          Value: false
-        tag_78:
-          Value: false
-        tag_8:
-          Value: false
-        tag_9:
-          Value: false
-        tile_0_0:
-          Value: false
-        tile_0_1:
-          Value: false
-        tile_0_2:
-          Value: false
-        tile_0_3:
-          Value: false
-        tile_0_4:
-          Value: false
-        tile_0_5:
-          Value: false
-        tile_0_6:
-          Value: false
-        tile_0_7:
-          Value: false
-        tile_0_8:
-          Value: false
-        tile_0_9:
-          Value: false
-        tile_1_0:
-          Value: false
-        tile_1_1:
-          Value: false
-        tile_1_2:
-          Value: false
-        tile_1_3:
-          Value: false
-        tile_1_4:
-          Value: false
-        tile_1_5:
-          Value: false
-        tile_1_6:
-          Value: false
-        tile_1_7:
-          Value: false
-        tile_1_8:
-          Value: false
-        tile_1_9:
-          Value: false
-        tile_2_0:
-          Value: false
-        tile_2_1:
-          Value: false
-        tile_2_2:
-          Value: false
-        tile_2_3:
-          Value: false
-        tile_2_4:
-          Value: false
-        tile_2_5:
-          Value: false
-        tile_2_6:
-          Value: false
-        tile_2_7:
-          Value: false
-        tile_2_8:
-          Value: false
-        tile_2_9:
-          Value: false
-        tile_3_0:
-          Value: false
-        tile_3_1:
-          Value: false
-        tile_3_2:
-          Value: false
-        tile_3_3:
-          Value: false
-        tile_3_4:
-          Value: false
-        tile_3_5:
-          Value: false
-        tile_3_6:
-          Value: false
-        tile_3_7:
-          Value: false
-        tile_3_8:
-          Value: false
-        tile_3_9:
-          Value: false
-        tile_4_0:
-          Value: false
-        tile_4_1:
-          Value: false
-        tile_4_2:
-          Value: false
-        tile_4_3:
-          Value: false
-        tile_4_4:
-          Value: false
-        tile_4_5:
-          Value: false
-        tile_4_6:
-          Value: false
-        tile_4_7:
-          Value: false
-        tile_4_8:
-          Value: false
-        tile_4_9:
-          Value: false
-        tile_5_0:
-          Value: false
-        tile_5_1:
-          Value: false
-        tile_5_2:
-          Value: false
-        tile_5_3:
-          Value: false
-        tile_5_4:
-          Value: false
-        tile_5_5:
-          Value: false
-        tile_5_6:
-          Value: false
-        tile_5_7:
-          Value: false
-        tile_5_8:
-          Value: false
-        tile_5_9:
-          Value: false
-        tile_6_0:
-          Value: false
-        tile_6_1:
-          Value: false
-        tile_6_2:
-          Value: false
-        tile_6_3:
-          Value: false
-        tile_6_4:
-          Value: false
-        tile_6_5:
-          Value: false
-        tile_6_6:
-          Value: false
-        tile_6_7:
-          Value: false
-        tile_6_8:
-          Value: false
-        tile_6_9:
-          Value: false
-        tingbot/base_footprint:
-          Value: true
-        tingbot/base_link:
-          Value: true
-        tingbot/camera_link:
-          Value: true
-        tingbot/caster_wheel_back:
-          Value: true
-        tingbot/chassis:
-          Value: true
-        tingbot/odom:
-          Value: true
-        tingbot/tingbot_camera_link:
-          Value: true
-        viewed_tag_112:
-          Value: true
-        viewed_tag_113:
-          Value: true
-        viewed_tag_115:
-          Value: true
-        viewed_tag_117:
-          Value: true
-        viewed_tag_119:
-          Value: true
-        viewed_tag_12:
-          Value: true
-        viewed_tag_123:
-          Value: true
-        viewed_tag_13:
-          Value: true
-        viewed_tag_14:
-          Value: true
-        viewed_tag_16:
-          Value: true
-        viewed_tag_17:
-          Value: true
-        viewed_tag_18:
-          Value: true
-        viewed_tag_19:
-          Value: true
-        viewed_tag_20:
-          Value: true
-        viewed_tag_21:
-          Value: true
-        viewed_tag_22:
-          Value: true
-        viewed_tag_24:
-          Value: true
-        viewed_tag_25:
-          Value: true
-        viewed_tag_26:
-          Value: true
-        viewed_tag_31:
-          Value: true
-        viewed_tag_33:
-          Value: true
-        viewed_tag_35:
-          Value: true
-        viewed_tag_36:
-          Value: true
-        viewed_tag_39:
-          Value: true
-        viewed_tag_41:
-          Value: true
-        viewed_tag_49:
-          Value: true
-        viewed_tag_5:
-          Value: true
-        viewed_tag_51:
-          Value: true
-        viewed_tag_53:
-          Value: true
-        viewed_tag_58:
-          Value: true
-        viewed_tag_6:
-          Value: true
-        viewed_tag_61:
-          Value: true
-        viewed_tag_62:
-          Value: true
-        viewed_tag_65:
-          Value: true
-        viewed_tag_67:
-          Value: true
-        viewed_tag_68:
-          Value: true
-        viewed_tag_70:
-          Value: true
-        viewed_tag_71:
-          Value: true
-        viewed_tag_72:
-          Value: true
-        world:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: false
       Show Axes: true
-      Show Names: false
+      Show Names: true
       Tree:
-        world:
-          duckiebot:
-            {}
-          tile_0_0:
-            tag_5:
-              {}
-          tile_0_1:
-            {}
-          tile_0_2:
-            tag_33:
-              {}
-            tag_62:
-              {}
-          tile_0_3:
-            tag_31:
-              {}
-            tag_68:
-              {}
-          tile_0_4:
-            tag_39:
-              {}
-            tag_63:
-              {}
-          tile_0_5:
-            tag_41:
-              {}
-            tag_67:
-              {}
-          tile_0_6:
-            tag_23:
-              {}
-          tile_0_7:
-            {}
-          tile_0_8:
-            tag_120:
-              {}
-          tile_0_9:
-            tag_8:
-              {}
-          tile_1_0:
-            tag_14:
-              {}
-          tile_1_1:
-            {}
-          tile_1_2:
-            tag_28:
-              {}
-          tile_1_3:
-            tag_58:
-              {}
-          tile_1_4:
-            tag_119:
-              {}
-          tile_1_5:
-            tag_60:
-              {}
-          tile_1_6:
-            tag_122:
-              {}
-          tile_1_7:
-            tag_115:
-              {}
-          tile_1_8:
-            tag_7:
-              {}
-          tile_1_9:
-            tag_15:
-              {}
-          tile_2_0:
-            {}
-          tile_2_1:
-            tag_18:
-              {}
-          tile_2_2:
-            tag_113:
-              {}
-          tile_2_3:
-            {}
-          tile_2_4:
-            tag_51:
-              {}
-            tag_72:
-              {}
-          tile_2_5:
-            tag_53:
-              {}
-            tag_71:
-              {}
-          tile_2_6:
-            tag_21:
-              {}
-          tile_2_7:
-            tag_13:
-              {}
-          tile_2_8:
-            {}
-          tile_2_9:
-            {}
-          tile_3_0:
-            tag_30:
-              {}
-            tag_65:
-              {}
-          tile_3_1:
-            tag_9:
-              {}
-          tile_3_2:
-            tag_24:
-              {}
-            tag_4:
-              {}
-          tile_3_3:
-            tag_112:
-              {}
-            tag_6:
-              {}
-          tile_3_4:
-            tag_52:
-              {}
-            tag_70:
-              {}
-          tile_3_5:
-            tag_49:
-              {}
-            tag_78:
-              {}
-          tile_3_6:
-            tag_124:
-              {}
-          tile_3_7:
-            tag_17:
-              {}
-          tile_3_8:
-            tag_38:
-              {}
-          tile_3_9:
-            tag_1:
-              {}
-            tag_64:
-              {}
-          tile_4_0:
-            tag_36:
-              {}
-            tag_61:
-              {}
-          tile_4_1:
-            tag_35:
-              {}
-          tile_4_2:
-            {}
-          tile_4_3:
-            tag_26:
-              {}
-          tile_4_4:
-            tag_121:
-              {}
-          tile_4_5:
-            {}
-          tile_4_6:
-            tag_111:
-              {}
-            tag_20:
-              {}
-          tile_4_7:
-            tag_118:
-              {}
-            tag_16:
-              {}
-          tile_4_8:
-            tag_57:
-              {}
-          tile_4_9:
-            tag_32:
-              {}
-            tag_66:
-              {}
-          tile_5_0:
-            {}
-          tile_5_1:
-            {}
-          tile_5_2:
-            {}
-          tile_5_3:
-            tag_12:
-              {}
-          tile_5_4:
-            tag_114:
-              {}
-          tile_5_5:
-            tag_117:
-              {}
-          tile_5_6:
-            {}
-          tile_5_7:
-            tag_110:
-              {}
-          tile_5_8:
-            {}
-          tile_5_9:
-            tag_11:
-              {}
-          tile_6_0:
-            tag_123:
-              {}
-          tile_6_1:
-            tag_19:
-              {}
-          tile_6_2:
-            tag_25:
-              {}
-          tile_6_3:
-            tag_22:
-              {}
-          tile_6_4:
-            {}
-          tile_6_5:
-            {}
-          tile_6_6:
-            tag_109:
-              {}
-          tile_6_7:
-            {}
-          tile_6_8:
-            {}
-          tile_6_9:
-            tag_116:
-              {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Class: rviz/Image
       Enabled: true
       Image Topic: /tingbot/line_detector_node/image_with_lines
@@ -1399,6 +795,22 @@ Visualization Manager:
       Transport Hint: raw
       Unreliable: false
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: false
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: ""
+      Name: RobotModel
+      Robot Description: tingbot_description
+      TF Prefix: tingbot
+      Update Interval: 0
+      Value: false
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -1423,32 +835,32 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.7295
+      Distance: 5.03072
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.69569
-        Y: 2.97949
-        Z: -0.858054
+        X: 1.40502
+        Y: 2.75722
+        Z: -0.495249
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.544797
+      Pitch: 0.584801
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.6436
+      Yaw: 6.25359
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 876
+  Height: 1056
   Hide Left Dock: false
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000171000002e0fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000021a000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d0061006700650100000248000000c00000001600ffffff000000010000013b000002e5fc0200000005fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000002e5000000b000fffffffb0000000a0049006d0061006700650000000041000001520000000000000000fb0000000a0049006d00610067006500000000410000026c0000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005ff00000040fc0100000002fb0000000800540069006d00650100000000000005ff000002f600fffffffb0000000800540069006d0065010000000000000450000000000000000000000488000002e000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000017100000394fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000021a000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d0061006700650100000248000001740000001600ffffff000000010000013b000002e5fc0200000005fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000002e5000000b000fffffffb0000000a0049006d0061006700650000000041000001520000000000000000fb0000000a0049006d00610067006500000000410000026c0000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073f00000040fc0100000002fb0000000800540069006d006501000000000000073f000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000005c80000039400000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -1457,6 +869,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1535
-  X: 55
-  Y: 116
+  Width: 1855
+  X: 65
+  Y: 24

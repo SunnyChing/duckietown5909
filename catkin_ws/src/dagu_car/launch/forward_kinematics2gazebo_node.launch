@@ -9,8 +9,10 @@
     <group ns="$(arg veh)">
         <!-- run local -->
 	<remap from="forward_kinematics2gazebo_node/velocity" to="cmd_vel" />
+	
         <node if="$(arg local)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" clear_params="true" required="true"/>
         <!-- run remote -->
         <node unless="$(arg local)" machine="$(arg veh)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" clear_params="true" required="true"/>
     </group>
+	
 </launch>

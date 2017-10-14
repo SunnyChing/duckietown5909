@@ -31,9 +31,9 @@
 	<arg name="/camera/raw" default="false"/>
 	<arg name="/camera/cam_info" default="true"/>
 	<arg name="/camera/raw/rect" default="false"/>
-	<arg name="/camera/local" default="false" />
+	<arg name="/camera/local" default="true" />
 
-	<arg name="wheels" default="true"/>
+	<arg name="wheels" default="false"/>
 
 	<arg name="joystick" default="true"/>
 
@@ -59,14 +59,14 @@
 	<arg name="/vehicle_avoidance/control" default="true"/>
 
 	<arg name="apriltags" default="false"/><!-- false -->
-	<arg name="/apriltags/local" default="false" /><!-- false -->
+	<arg name="/apriltags/local" default="true" /><!-- false -->
 
 
 	<arg name="LED" default="true" />
 	<arg name="/LED/pattern_switch" default="false" /><!-- false -->
 	<arg name="/LED/detector" default="false" /><!-- false -->
 	<arg name="/LED/joystick" default="false" />
-	<arg name="/LED/emitter"  default="true" />
+	<arg name="/LED/emitter"  default="false" />
 	<arg name="/LED/interpreter" default="false" /><!-- false -->
 
 	<arg name="odometry_learning" default="false"/>
@@ -90,7 +90,7 @@
 	<arg name="SLAM" default="false"/>
 
 	<arg name="localization" default="false"/><!-- false -->
-	<arg name="/localization/local" default="false" /><!-- false -->
+	<arg name="/localization/local" default="true" /><!-- false -->
 	<arg name="/localization/map_name" default="lab5916_map" />
 	<arg name="/localization/gui" default="false"/><!-- false -->
 

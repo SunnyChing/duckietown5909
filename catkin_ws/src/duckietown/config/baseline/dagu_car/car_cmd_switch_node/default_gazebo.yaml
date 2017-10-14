@@ -1,6 +1,6 @@
 mode_topic: "fsm_node/mode"
 source_topics: #Mapping from cmd source name to topics
-  lane: "lane_controller_node/car_cmd"
+  lane: "lane_controller_node_gazebo/car_cmd"
   intersection: "open_loop_intersection_control_node/car_cmd"
   coordination: "simple_coordinator_node/car_cmd"
   joystick: "keyboard_mapper_node/car_cmd"

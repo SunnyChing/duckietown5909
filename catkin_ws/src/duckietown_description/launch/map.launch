@@ -6,7 +6,7 @@
     <arg name="gui" default="true" /> <!--rviz-->
     <arg name="rviz_config" default="rviz_default"/>
     <arg name="init_pose" value="-x 1.5 -y 1.6 -z 0" />
-    <arg name="gazebo" value="true" />
+    <arg name="gazebo" value="false" />
      <group ns="$(arg veh)">
         <node if="$(arg gui)" name="rviz" pkg="rviz" type="rviz" args="-d $(find duckietown_description)/rviz/$(arg rviz_config).rviz" />
     </group>
@@ -30,13 +30,14 @@
 	args="-param map_description -urdf -model town"  respawn="false" output="screen"/>
 
  <group ns="$(arg veh)">
- 	<param name="duckiebot_description" command="$(find xacro)/xacro.py '$(find duckietown_description)/urdf/duck.xacro'" /> 
+ 	<param name="duckiebot_description" command="$(find xacro)/xacro.py '$(find duckietown_description)/urdf/duckiebot.urdf.xacro'" /> 
+	<!--param name="duckiebot_description" command="$(find xacro)/xacro.py '$(find duckietown_description)/urdf/duck.xacro'" /--> 
 	<param name="tf_prefix" value="$(arg veh)" />
 	<node name="duckiebot_state_publisher" pkg="robot_state_publisher" type="state_publisher" >
      	<remap from="robot_description" to="duckiebot_description" />
 	</node>
   	<node if="$(arg gazebo)"  name="spawn_duckie" pkg="gazebo_ros" type="spawn_model" 
-		args="$(arg init_pose) -urdf -param duckiebot_description -model $(arg veh)"  respawn="false" output="screen"/>
+		args="$(arg init_pose) -urdf -param duckiebot_description -model duckiebot"  respawn="false" output="screen"/>
     	
 
  </group>

@@ -27,8 +27,8 @@
     <torque>20</torque>
     <commandTopic>cmd_vel</commandTopic>
     <odometryTopic>odom</odometryTopic>
-    <odometryFrame>odom</odometryFrame>
-    <robotBaseFrame>base_footprint</robotBaseFrame>
+    <odometryFrame>odom1</odometryFrame>
+    <robotBaseFrame>base_footprint1</robotBaseFrame>
   </plugin>
 </gazebo>
 

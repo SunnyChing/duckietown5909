@@ -22,7 +22,7 @@ class LocalizationNode(object):
 
         # Constants
         self.world_frame = "world"
-        self.duckiebot_frame = "tingbot/odom"
+        self.duckiebot_frame = "tingbot/base_footprint"
         #self.duckiebot_frame = "duckiebot"
 
         self.duckiebot_lifetime = self.setupParam("~duckiebot_lifetime", 5) # The number of seconds to keep the duckiebot alive bewtween detections

@@ -539,7 +539,7 @@
 			<include file="$(find intersection_control)/launch/open_loop_intersection_controller_node.launch">
 				<arg name="veh" value="$(arg veh)"/>        
 				<arg name="config" value="$(arg config)"/>        
-				<arg name="param_file_name" value="$(arg param_file_name)"/>   
+				<arg name="param_file_name" value="$(arg fsm_file_name)"/>   
 				<arg name="local" value="true"/>        +++++++++++++     
 			</include>
 		</group>
@@ -651,13 +651,20 @@
 		</include>
 
 		<!-- localization -->
-		<remap from="localization_node/apriltags" to="apriltags_postprocessing_node/apriltags_out"/>
+		<remap from="localization_node_gazebo/apriltags" to="apriltags_postprocessing_node/apriltags_out"/>
+		<include file="$(find localization)/launch/localization_node_gazebo.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="local" value="$(arg /localization/local)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>  ---duck in gazebo
+		<!--<remap from="localization_node/apriltags" to="apriltags_postprocessing_node/apriltags_out"/>
 		<include file="$(find localization)/launch/localization_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="local" value="$(arg /localization/local)"/>
 			<arg name="config" value="$(arg config)"/>
 			<arg name="param_file_name" value="$(arg param_file_name)"/>
-		</include>
+		</include>--> ---only visual duck
 	</group>
 	<!-- End localization -->
 

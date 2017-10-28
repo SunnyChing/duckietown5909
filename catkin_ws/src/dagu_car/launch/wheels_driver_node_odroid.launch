@@ -1,0 +1,9 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <node ns="$(arg veh)" pkg="dagu_car" type="wheels_driver_node_odroid.py" name="wheels_driver_node" output="screen" clear_params="false" required="false"/>
+    
+    <!-- Subscriptions -->
+    <!-- "~wheels_cmd": Twist. Command for the wheels -->
+	<!--linear.x v_right-->
+	<!--linear.y v_left-->
+</launch>

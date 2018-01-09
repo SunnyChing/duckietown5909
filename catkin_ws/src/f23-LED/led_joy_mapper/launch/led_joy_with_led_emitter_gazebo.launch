@@ -1,0 +1,25 @@
+
+   <launch>
+	<arg name="pkg_name" value="led_joy_mapper"/>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<include file="$(find duckietown)/machines"/>
+    <arg name="local" default="true" doc="true for running on laptop. false for running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+    <!-- KB joy -->
+<node if="$(arg local)" ns="$(arg veh)" pkg="joy_mapper" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen" clear_params="true" required="true"/>
+
+	<!-- mapper -->
+	<group ns="$(arg veh)">
+		<node name="led_joy_mapper_node" pkg="led_joy_mapper" type="led_joy_mapper_node.py" output="screen">
+		</node>
+		<node  name="led_emitter_node" pkg="led_emitter" type="led_emitter_node_gazebo.py" output="screen">
+			<remap from="~change_light_frequency" to="led_joy_mapper_node/change_light_frequency"/>
+			<remap from="~change_color_pattern" to="led_joy_mapper_node/change_color_pattern"/>
+			<remap from="~tag"  to="apriltags_postprocessing_node/apriltags_out"/>
+			<rosparam command="load" file="$(find duckietown)/config/$(arg config)/led_interpreter/LED_protocol.yaml"/> <!-- is this legit? -->
+		</node>
+	</group>
+</launch>
+

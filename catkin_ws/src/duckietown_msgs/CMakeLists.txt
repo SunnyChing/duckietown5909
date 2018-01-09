@@ -100,7 +100,8 @@ add_message_files(
   ObstacleImageDetectionList.msg
   ObstacleProjectedDetection.msg
   ObstacleProjectedDetectionList.msg
-
+  IntersectionNodeArray.msg
+  GazeboLED.msg
 )
 
 ## Generate services in the 'srv' folder

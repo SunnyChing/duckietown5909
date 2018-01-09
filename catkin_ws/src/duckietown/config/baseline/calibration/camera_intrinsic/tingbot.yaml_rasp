@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [502.67677300786767, 0.0, 302.52168197746204, 0.0, 506.4482565893839, 248.2750267889581,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: tingbot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.24363396208932542, -0.004362894029844949, -0.006607236783242658, -0.0018656521357585487,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [433.0703430175781, 0.0, 292.1134271804076, 0.0, 0.0, 473.73919677734375,
+    246.0753588507032, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

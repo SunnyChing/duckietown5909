@@ -37,6 +37,13 @@ class LEDJoyMapper(object):
             # logitek button is pressed
             # 8: 'test_all_1',
         }
+	self.axe2patterns = {
+             # '<- ->' is pressed
+            6: 'Turn',
+            
+            
+        }
+
 
     def cbJoy(self, joy_msg):
         self.joy = joy_msg
@@ -48,6 +55,14 @@ class LEDJoyMapper(object):
             if self.joy.buttons[b] == 1:
                 self.pub_pattern.publish(pattern)
                 rospy.loginfo("Publishing pattern %s" % (pattern))
+	for a, pattern in self.axe2patterns.items():
+		if self.joy.axes[a]==1:
+			self.pub_pattern.publish(pattern+'Left')
+			rospy.loginfo("Publishing pattern %s" % (pattern)+'Left')
+		if self.joy.axes[a]==-1:
+			self.pub_pattern.publish(pattern+'Right')
+			rospy.loginfo("Publishing pattern %s" % (pattern)+'Right')
+			
 
 if __name__ == "__main__":
     rospy.init_node("led_joy_mapper",anonymous=False)

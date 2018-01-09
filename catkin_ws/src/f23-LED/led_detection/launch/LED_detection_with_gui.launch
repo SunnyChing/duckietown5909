@@ -6,7 +6,7 @@
 	<arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
 	<arg name="config" default="baseline" doc="Specify a config."/>
 	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman"/>
-	<arg name="continuous" default="False"/> <!-- manual trigger required if false [interactive mode] -->
+	<arg name="continuous" default="true"/> <!-- manual trigger required if false [interactive mode] -->
 
 	<group ns="$(arg veh)">
 	  <!-- Run visualizer on local (laptop) -->

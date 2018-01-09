@@ -3,7 +3,7 @@
 import sys
 import rospy
 from navigation.srv import *
-from duckietown_msgs.msg import FSMState, SourceTargetNodes, BoolStamped, Twist2DStamped
+from duckietown_msgs.msg import FSMState, SourceTargetNodes, BoolStamped, Twist2DStamped, IntersectionNodeArray
 from std_msgs.msg import Int16, String
 
 class ActionsDispatcherNode():
@@ -15,7 +15,10 @@ class ActionsDispatcherNode():
         self.first_update = True
 
         self.actions = []
-
+        self.path =[]
+        self.path_intersection = IntersectionNodeArray()
+        self.trafficLightNode = {'13':'True','15':'True','17':'True','19':'True'}
+        
         # Parameters:
         self.fsm_mode = self.setupParameter("~initial_mode","JOYSTICK_CONTROL")
         self.localization_mode = self.setupParameter("~localization_mode","LOCALIZATION")
@@ -31,6 +34,8 @@ class ActionsDispatcherNode():
         self.pub = rospy.Publisher("~turn_type", Int16, queue_size=1, latch=True)
         self.pubList = rospy.Publisher("~turn_plan", String, queue_size=1, latch=True)
         self.pub_localized = rospy.Publisher("~localized", BoolStamped, queue_size=1, latch=True)
+        #self.pubNode = rospy.Publisher("~intersectionType", BoolStamped, queue_size=1, latch=True)
+        self.pubNodeList = rospy.Publisher("~node_plan", IntersectionNodeArray, queue_size=1, latch=True)
 
     def setupParameter(self,param_name,default_value):
         value = rospy.get_param(param_name,default_value)
@@ -42,6 +47,7 @@ class ActionsDispatcherNode():
         self.fsm_mode = data.state
         if self.fsm_mode == self.reset_mode:
             self.actions = []
+            self.path_intersection = IntersectionNodeArray()
             rospy.wait_for_service('graph_search')
             graph_search = rospy.ServiceProxy('graph_search', GraphSearch)
             graph_search('0', '0')
@@ -56,10 +62,13 @@ class ActionsDispatcherNode():
         if self.first_update == True and self.fsm_mode == self.trigger_mode and self.actions:
             # Allow time for open loop controller to update state and allow duckiebot to stop at redline:
             rospy.sleep(self.stop_line_wait_time)
-        
+          
             # Proceed with action dispatching:
-            action = self.actions.pop(0)
-            print 'Dispatched:', action
+            action = self.actions.pop(0) # pop() method removes and returns the element at the given index 
+            node = self.path_intersection.nodes.pop(0)
+            print 'Dispatched:', action, node
+
+            #self.pubNode.publish(msg)
             if action == 's':
                 self.pub.publish(Int16(1))
             elif action == 'r':
@@ -68,12 +77,15 @@ class ActionsDispatcherNode():
                 self.pub.publish(Int16(0))
             elif action == 'w':
                 self.pub.publish(Int16(-1))    
-    
+
             action_str = ''
+
             for letter in self.actions:
                 action_str += letter
 
+
             self.pubList.publish(action_str)
+            self.pubNodeList.publish( self.path_intersection.nodes)
             self.firstUpdate = False
 
     def graph_search(self, data):
@@ -83,15 +95,30 @@ class ActionsDispatcherNode():
             graph_search = rospy.ServiceProxy('graph_search', GraphSearch)
             resp = graph_search(data.source_node, data.target_node)
             self.actions = resp.actions
+            self.path = resp.path
+            self.path_intersection= IntersectionNodeArray()
+            #print self.path
+
             if self.actions:
                 # remove 'f' (follow line) from actions and add wait action in the end of queue
-                self.actions = [x for x in self.actions if x != 'f']
-                self.actions.append('w')
+                for i, x in enumerate(self.actions):
+                    if x != 'f':
+                        if self.path[i] in self.trafficLightNode.keys():
+                            self.path_intersection.nodes.append('True')
+                        else: 
+                            self.path_intersection.nodes.append('False')
+                self.path_intersection.nodes.append('False') 
+                self.actions = [x for i, x in enumerate(self.actions) if x != 'f']
+                self.actions.append('w') 
+                print 'intersection node', self.path_intersection
                 print 'Actions to be executed:', self.actions
                 action_str = ''
                 for letter in self.actions:
                     action_str += letter
+
+
                 self.pubList.publish(action_str)
+                self.pubNodeList.publish( self.path_intersection.nodes)
                 self.dispatcher()
             else:
                 print 'Actions to be executed:', self.actions

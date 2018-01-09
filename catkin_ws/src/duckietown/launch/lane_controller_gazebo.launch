@@ -58,6 +58,8 @@
 	<remap from="car_cmd2gazebo_node/car_cmd" to="lane_controller_node/car_cmd"/>
         <node name="car_cmd2gazebo_node" pkg="dagu_car" type="car_cmd2gazebo.py" output="screen" clear_params="true" required="true"/>
     </group>-->
+
+
     <!--group if="$(arg drive)"-->
         <!-- Wheel Driver -->
 	<!--<remap from="wheels_driver_node/wheels_cmd" to="inverse_kinematics_node/wheels_cmd"/>

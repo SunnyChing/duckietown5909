@@ -1,0 +1,9 @@
+<launch>
+    <!-- SYSTEM MODEL -->
+    <!-- vehicle parameters -->
+
+
+    <!-- HIGH LEVEL CONTROLLER -->
+    <node pkg="barc" type="controller_mpc.jl" name="MPC" output="screen" />
+
+</launch>

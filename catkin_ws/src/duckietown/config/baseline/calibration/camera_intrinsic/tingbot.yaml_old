@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: tingbot
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [343.950772, 0.000000, 319.806640, 0.000000, 343.950889, 239.038571, 0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.000893, 0.000026, -0.000181, 0.000083, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [343.928101, 0.000000, 319.395008, 0.000000, 0.000000, 343.716492, 238.397743, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]

@@ -130,6 +130,7 @@ def create_patterns():
 		'blue': [0,0,1],
 		'yellow': [1,1,0],
 		'orange': [1,0.4,0],
+		'black': [0,0,0],
 	}
 		
 	frequencies = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 
@@ -215,18 +216,22 @@ def cycle_LEDs(sequence):
 		FRONT_LEFT:None,
 		FRONT_RIGHT:None,
 	}
-	while True:
-		t = time.time()
-		_, (_, config) = get_current_step(t, t0, sequence)
+	try:
+		while True:
+			t = time.time()
+			_, (_, config) = get_current_step(t, t0, sequence)
 
-		for name, col in config.items():
-			k = DuckietownLights.name2port[name]
+			for name, col in config.items():
+				k = DuckietownLights.name2port[name]
 			
-			if last[name] != col:
-				led.setRGB(k, col)
-				print(name, k, col)
-				last[name] = col
+				if last[name] != col:
+					led.setRGB(k, col)
+					print(name, k, col)
+					last[name] = col
 
-		sleep(0.01)
+			sleep(0.01)
+	finally:
+		k = DuckietownLights.name2port[name]
+		led.setRGB(k, [0,0,0])
 
 

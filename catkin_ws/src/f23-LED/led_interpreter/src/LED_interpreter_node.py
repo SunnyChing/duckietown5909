@@ -2,8 +2,8 @@
 import rospy
 import time
 #from led_detection.LEDDetector import LEDDetector
-from std_msgs.msg import Byte
-from duckietown_msgs.msg import FSMState, Vector2D, AprilTags, LEDDetection, LEDDetectionArray, LEDDetectionDebugInfo, SignalsDetection 
+from std_msgs.msg import Byte, String
+from duckietown_msgs.msg import FSMState, Vector2D, LEDDetection, LEDDetectionArray, LEDDetectionDebugInfo, SignalsDetection, BoolStamped, IntersectionNodeArray
 from sensor_msgs.msg import CompressedImage
 #from duckietown_utils.bag_logs import numpy_from_ros_compressed
 #import numpy as np
@@ -48,6 +48,8 @@ class LEDInterpreterNode(object):
 		#self.sub_tags = rospy.Subscriber("apriltags_postprocessing_fast_node/apriltags", AprilTags, self.CheckTags)
 		self.sub_LEDs = rospy.Subscriber("~raw_led_detection", LEDDetectionArray, self.Interpreter, queue_size = 1)
 		#self.switch = rospy.Subscriber("~mode", FSMState, self.seeSwitch)
+		#rospy.Subscriber('~intersectionType_', BoolStamped, lambda msg: self.set('trafficLightIntersection', msg.data))
+		rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('trafficLightIntersection', msg.nodes.pop(0)))
 		rospy.loginfo("Initialized.")
 
 		#while not rospy.is_shutdown():
@@ -79,6 +81,7 @@ class LEDInterpreterNode(object):
 
 	def Interpreter(self, msg):
 		rospy.loginfo("[%s] Read a message from Detector" %(self.node_name))
+		rospy.loginfo('[%s] Intersection Type: %s'%(self.node_name, self.trafficLightIntersection))
 		#initialize the standard output message
 		self.front = SignalsDetection.NO_CAR
 		self.right = SignalsDetection.NO_CAR

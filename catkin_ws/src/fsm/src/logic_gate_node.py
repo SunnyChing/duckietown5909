@@ -83,7 +83,7 @@ class LogicGateNode(object):
             msg.data = all(bool_list)
         elif gate_type == "OR":
             msg.data = any(bool_list)
-        print bool_list
+        #print bool_list
         return msg
 
     def cbBoolStamped(self, msg, event_name):

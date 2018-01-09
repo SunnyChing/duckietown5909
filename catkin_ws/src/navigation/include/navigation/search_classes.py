@@ -46,8 +46,10 @@ class Path(object):
         self.path = []
         self.actions = []
         node = search_node
+        #print node
         while node is not None:
             self.path.append(node.state)
+            #print node.state
             if node.action != None:
                 self.actions.append(node.action)
             node = node.parent

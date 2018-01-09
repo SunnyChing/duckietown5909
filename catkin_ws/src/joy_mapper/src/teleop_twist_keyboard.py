@@ -116,7 +116,7 @@ if __name__=="__main__":
 		print vels(speed,turn)
 		while(1):
 			time_stamp = rospy.Time.now()
-			print time_stamp
+			#print time_stamp
 			key = getKey()
 			if key in moveBindings.keys():
 				x=moveBindings[key][1]

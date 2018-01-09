@@ -15,7 +15,7 @@
                 <visual>
                     <origin xyz="${tile_width/2} ${tile_width/2} ${-tile_thickness/2}" rpy="0 0 ${rotation * pi/180}"/>
                     <geometry>
-                        <mesh filename="package://duckietown_description/urdf/meshes/${type}.dae" />
+                        <mesh filename="package://rc_car_description/urdf/meshes/${type}.dae" />
                     </geometry>
                 </visual>
 		<inertial> 
@@ -70,7 +70,7 @@
             <visual>
                 <origin xyz="-0.0254 -0.0254 0" />
                 <geometry>
-                    <mesh filename="package://duckietown_description/urdf/meshes/tags/tag_${id}.dae" />
+                    <mesh filename="package://rc_car_description/urdf/meshes/tags/tag_${id}.dae" />
                 </geometry>
             </visual>
 <collision> 

@@ -1,0 +1,4 @@
+<launch>
+  <node name="sunny" pkg="sunny_pkg" type="talker.py" output="screen" />
+  <node name="yard" pkg="sunny_pkg" type="listener.py" output="screen"/>
+</launch>

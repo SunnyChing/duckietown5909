@@ -27,18 +27,21 @@ class GraphSearchProblem(object):
 		"""Returns a solution path."""
 		q = PriorityQueue(f=f)
 		q.append(SearchNode(self.start))
+		#print q
 		expanded = set([self.start])
 		while q:
-			search_node = q.pop()
+			search_node = q.pop()   #last one
+			print search_node
 			if self.test_goal(search_node.state):
 				return Path(search_node)
-			expanded.add(search_node)
+			expanded.add(search_node)   
 			for child in self.expand_node(search_node):
 				if (child not in q) and (child not in expanded):
 				    q.append(child)
 				elif child in q:
 				    #look for a node in q with the same state as child, but different parent and cost.
 				    previous_search_node = q[child]
+				    #print q[child]
 				    if child.cost < previous_search_node.cost:
 				        del q[previous_search_node]
 				        q.append(child)

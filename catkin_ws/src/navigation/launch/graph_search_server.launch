@@ -1,23 +1,23 @@
 <launch>
     <arg name="veh" doc="Name of vehicle. ex: megaman"/>
-    <arg name="map_name" default="lab5916_tiles />
-	<param name="map_name" value="$(arg map_name)" />
-    <param name="veh" value="$(arg veh)"/>
+    <arg name="map_name" default="lab5916_tiles" />
+<param name="map_name" value="$(arg map_name)" />    
+<param name="veh" value="$(arg veh)"/>
 
 	<node
         ns="$(arg veh)"
-		name="graph_search_server"
+	name="graph_search_server_node"
 		pkg="navigation"
-		type="graph_search_server.py"
+		type="graph_search_server_node.py"
 		output="screen"
 		clear_params="true" required="true"
 	/>
 
     <node
         ns="$(arg veh)"
-		name="actions_dispatcher"
+		name="actions_dispatcher_node"
 		pkg="navigation"
-		type="actions_dispatcher.py"
+		type="actions_dispatcher_node.py"
 		output="screen"
 		clear_params="true" required="true"
 	/>

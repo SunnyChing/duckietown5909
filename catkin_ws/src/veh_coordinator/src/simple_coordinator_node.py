@@ -2,7 +2,7 @@
 from __future__ import print_function
 from random import random
 import rospy
-from duckietown_msgs.msg import CoordinationClearance, FSMState, BoolStamped, Twist2DStamped
+from duckietown_msgs.msg import CoordinationClearance, FSMState, BoolStamped, Twist2DStamped, IntersectionNodeArray
 from duckietown_msgs.msg import SignalsDetection, CoordinationSignal
 from std_msgs.msg import String
 from time import time
@@ -23,7 +23,7 @@ class VehicleCoordinator():
     """The Vehicle Coordination Module for Duckiebot"""
 
     T_MAX_RANDOM = 2.0 # seconds
-    T_CROSS = 6.0  # seconds
+    T_CROSS = 5.0  # seconds
     T_SENSE = 2.0      # seconds
 
     def __init__(self):
@@ -54,6 +54,7 @@ class VehicleCoordinator():
         self.right_veh = UNKNOWN
         self.opposite_veh = UNKNOWN
         rospy.Subscriber('~signals_detection', SignalsDetection, self.process_signals_detection)
+        rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('traffic_light_intersection', msg.nodes.pop(0)))
 
         # Publishing
         self.clearance_to_go = CoordinationClearance.NA
@@ -105,7 +106,8 @@ class VehicleCoordinator():
         self.set('traffic_light', msg.traffic_light_state)
         self.set('right_veh', msg.right)
         self.set('opposite_veh', msg.front)
-
+        
+        
     def reset_signals_detection(self):
         self.traffic_light = UNKNOWN
         self.right_veh = UNKNOWN
@@ -129,6 +131,7 @@ class VehicleCoordinator():
         self.coordination_state_pub.publish(data=self.state)
 
     def loop(self):
+       
         self.reconsider()
         self.publish_topics()
 
@@ -136,7 +139,7 @@ class VehicleCoordinator():
         if self.state == State.LANE_FOLLOWING:
             if self.mode == 'COORDINATION':
                 self.reset_signals_detection()
-                if self.traffic_light_intersection:
+                if self.traffic_light_intersection == True:
                     self.set_state(State.TL_SENSING)
                 else:
                     self.set_state(State.AT_STOP_CLEARING)
@@ -144,7 +147,7 @@ class VehicleCoordinator():
         elif self.state == State.AT_STOP_CLEARING:
             if self.right_veh != SignalsDetection.NO_CAR or self.opposite_veh == SignalsDetection.SIGNAL_B or self.opposite_veh == SignalsDetection.SIGNAL_C:
                 self.set_state(State.AT_STOP_CLEARING)
-            elif self.time_at_current_state() > self.T_CROSS + self.T_SENSE:
+            elif self.time_at_current_state() > self.T_CROSS + self.T_SENSE:  #opppsite_veh is at signalA
                 self.set_state(State.AT_STOP_CLEAR)
 
         elif self.state == State.AT_STOP_CLEAR:

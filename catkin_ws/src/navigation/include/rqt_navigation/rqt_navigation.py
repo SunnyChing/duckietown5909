@@ -41,7 +41,7 @@ class RQTNavigation(Plugin):
 
     def loadComboBoxItems(self):
         # Loading map
-        self.map_name = rospy.get_param('/map_name', 'tiles_226')
+        self.map_name = rospy.get_param('/map_name', 'lab_5916_tiles')
         self.script_dir = os.path.dirname(__file__)
         self.map_path = self.script_dir + '/../../src/maps/' + self.map_name
         gc = graph_creator()

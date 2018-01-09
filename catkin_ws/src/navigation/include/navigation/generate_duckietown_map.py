@@ -225,10 +225,10 @@ class graph_creator():
 		pickle.dump([self.edges, self.node_locations], afile)
 		afile.close()		
 
-	def build_graph_from_csv(self, csv_filename='tiles_226.csv'):
+	def build_graph_from_csv(self, csv_filename='lab5916_tiles.csv'):
 		script_dir = os.path.dirname(__file__)
 		map_path = script_dir + '/../../src/maps/' + csv_filename
-		with open(map_path + '.csv', 'rb') as f:
+		with open(map_path +'.csv', 'rb') as f:
 			spamreader = csv.reader(f,skipinitialspace=True)
 			for i,row in enumerate(spamreader):
 				if i != 0:
@@ -343,13 +343,13 @@ class graph_creator():
  
 if __name__ == "__main__":
     gc = graph_creator()
-    duckietown_graph = gc.build_graph_from_csv(csv_filename='tiles_226.csv')
+    duckietown_graph = gc.build_graph_from_csv(csv_filename='lab5916_tiles.csv')
     # Node locations (for visual representation) and heuristics calculation
     #node_locations, edges = gc.get_map_226()
     #gc.add_node_locations(node_locations)
     #gc.add_edges(edges)
     #gc.pickle_save()
-    duckietown_graph.draw(map_name='duckietown_226')
+    duckietown_graph.draw(map_name='lab5916_tiles')
 
 
 

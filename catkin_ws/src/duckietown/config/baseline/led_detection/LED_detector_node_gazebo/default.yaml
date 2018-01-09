@@ -1,0 +1,15 @@
+veh: gzbbot
+cars:
+ car1: 
+    name: "tingbot"
+    topic: "led_emitter_node/emit_color_pattern"
+ car2: 
+    name: "yardbot"
+    topic: "led_emitter_node/emit_color_pattern"
+ car3: 
+    name: "gzbbot"
+    topic: "led_emitter_node/emit_color_pattern"
+
+ trafficLight:
+    name: ""
+    topic: "traffic_light/raw_led_trafficlight"

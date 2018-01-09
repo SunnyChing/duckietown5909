@@ -24,9 +24,9 @@ source $DUCKIETOWN_ROOT/catkin_ws/devel/setup.bash
 exec "$@" #Passes arguments. Need this for ROS remote launching to work.
 #SUNNY
 #source set_ros_master.sh sunnybot
-source set_ros_master.sh tingbot
+source set_ros_master.sh 
 #source set_vehicle_name.sh sunnybot
-source set_vehicle_name.sh tingbot
+source set_vehicle_name.sh gzbbot
 export ROSLAUNCH_SSH_UNKNOWN=1
 echo "ROSLAUNCH_SSH_UNKNOWN"
 echo "------------------------------------"

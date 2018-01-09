@@ -8,6 +8,7 @@
     <arg name="pkg_name" value="veh_coordinator"/>
     <arg name="node_name" default="fake_coordinator_node"/>
 
+     
     <group ns="$(arg veh)">        
         <!-- run local -->
         <node if="$(arg local)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" clear_params="true" required="true">

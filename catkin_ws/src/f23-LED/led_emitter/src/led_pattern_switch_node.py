@@ -36,6 +36,7 @@ class LEDPatternSwitchNode(object):
         if src_name == self.current_src_name:
             #rospy.loginfo("[%s] %s callback matches, publishing"%(self.node_name,src_name))
             self.pub_cmd.publish(msg)
+            #print msg
         #else:
             #rospy.loginfo("[%s] %s callback does not match, not publishing"%(self.node_name,src_name))
 

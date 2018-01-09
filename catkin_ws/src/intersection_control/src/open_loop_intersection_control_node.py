@@ -97,20 +97,26 @@ class OpenLoopIntersectionNode(object):
         rospy.loginfo("[%s] interesction_done!" %(self.node_name))
     
     def update_trajectory(self,turn_type):
-        rospy.loginfo("updating trajectory: distance from stop_line=%s, lane_pose_phi = %s", self.stop_line_reading.stop_line_point.x,  self.lane_pose.phi)
+        rospy.loginfo("updating trajectory: distance from stop_line=%s, lane_pose_phi = %s", self.stop_line_reading.stop_line_point.x,  self.lane_pose.phi)#adjust heading , then the distance to stop line
         first_leg = (self.maneuvers[turn_type]).pop(0)
-        exec_time = first_leg[0];
-        car_cmd   = first_leg[1];
-        new_exec_time = exec_time + self.stop_line_reading.stop_line_point.x/car_cmd.v
-        rospy.loginfo("old exec_time = %s, new_exec_time = %s" ,exec_time, new_exec_time)
+        second_leg = (self.maneuvers[turn_type]).pop(0)
+        #print first_leg
+        exec_time = second_leg[0];
+        car_cmd   = second_leg[1];
+        new_exec_time = 0.3
+
         ###### warning this next line is because of wrong inverse kinematics - remove the 10s after it's fixed
-        new_car_cmd = Twist2DStamped(v=car_cmd.v,omega=10*(car_cmd.omega/10 - self.lane_pose.phi/new_exec_time))
+        new_car_cmd = Twist2DStamped(v=0,omega=(-self.lane_pose.phi/new_exec_time))
         new_first_leg = [new_exec_time,new_car_cmd]
-        print "old car command"
-        print car_cmd
-        print "new_car_command"
-        print new_car_cmd
+        new_exec_time = self.stop_line_reading.stop_line_point.x/car_cmd.v
+        rospy.loginfo("old exec_time = %s, new_exec_time = %s" ,exec_time, new_exec_time)
+        new_car_cmd = Twist2DStamped(v=car_cmd.v,omega=car_cmd.omega)
+        new_second_leg = [new_exec_time,new_car_cmd] 
+        #print "first car command",new_first_leg[1]
+        #print "second_car_command",new_second_leg[1]
         self.maneuvers[turn_type].insert(0,new_first_leg)
+        self.maneuvers[turn_type].insert(1,new_second_leg)
+#------------------------------------------------------------------------------------------ insert a leg ----------------------
 
     def trigger(self,turn_type):
         if turn_type == -1: #Wait. Publish stop command. Does not publish done.
@@ -132,7 +138,8 @@ class OpenLoopIntersectionNode(object):
                     return
                 cmd.header.stamp = rospy.Time.now()
                 self.pub_cmd.publish(cmd)
-                if index > 1:
+                #print index
+                if index > 2:
                     # See if need to publish interesction_done
                     if self.in_lane and not (published_already):
                         published_already = True

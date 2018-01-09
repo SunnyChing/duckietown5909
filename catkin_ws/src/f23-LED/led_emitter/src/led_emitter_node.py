@@ -46,7 +46,7 @@ class LEDEmitter(object):
                 self.is_on = False
         else:
             for i in range(5):
-                self.led.setRGB(i, self.pattern[i])
+                self.led.setRGB(i, self.pattern[2])
                 self.is_on = True
 
     def changePattern(self, msg):

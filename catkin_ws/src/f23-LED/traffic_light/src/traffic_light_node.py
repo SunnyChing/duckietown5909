@@ -83,4 +83,7 @@ if __name__ == '__main__':
     rospy.init_node('traffic_light',anonymous=False)
     node = TrafficLight()
     rospy.spin()
+   # finally:
+   #     for i in range(0,3):
+    #            self.led.setRGB(i,[0,0,0])
 

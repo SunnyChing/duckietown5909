@@ -49,7 +49,7 @@ class LanePoseVisualzer(object):
         marker.pose.orientation.w = yaw_quat[3]
         
         marker.pose.position.x = 0.0
-        marker.pose.position.y = -lane_pose_msg.d
+        marker.pose.position.y = lane_pose_msg.d                #SUNNY: -lane_pose_msg.d 
         marker.pose.position.z = 0.0
 
         marker.scale.x = 0.3

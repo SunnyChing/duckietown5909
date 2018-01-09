@@ -136,7 +136,7 @@
 				<arg name="local" value="$(arg /camera/local)" />
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
-                              <!--arg name="cali_file_name" value="$(arg veh)_rect" /-->    -----bmqm
+                                    <!--arg name="cali_file_name" value="$(arg veh)_rect" /-->    -----bmqm
 				<arg name="node_name" value="raw_cam_info_reader_node" />
 				<arg name="image_type" value="raw" />
 			</include>
@@ -187,12 +187,14 @@
 				<include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
 					<arg name="veh" value="$(arg veh)"/>
 					<arg name="config" value="$(arg config)"/>
+<arg name="local" value="true"/>
 				</include>
 				<!-- run the velocity_to_pose_node -->
 				<remap from="velocity_to_pose_node/velocity" to="forward_kinematics_node/velocity" />
 				<include file="$(find dagu_car)/launch/velocity_to_pose_node.launch">
 					<arg name="veh" value="$(arg veh)"/>
 					<arg name="config" value="$(arg config)"/>
+<arg name="local" value="true"/>
 				</include>        
 		</group>
 	</group>
@@ -388,8 +390,8 @@
 		<!-- AprilTags Detections -->
 		<remap from="image_rect" to="camera_node/image/rect" />
 		<remap from="camera_node/image/camera_info" to="camera_node/raw_camera_info" />
-		<remap from="apriltags_detector_node/image_raw" to="camera_node/image/rect"/>
-		<remap from="apriltags_detector_node/camera_info" to="camera_node/raw_camera_info"/>
+		<remap from="apriltags_detector_node/image_raw" to="camera_node/image/rect"/>     ???????????
+		<remap from="apriltags_detector_node/camera_info" to="camera_node/raw_camera_info"/>   ????????????
 		<include file="$(find apriltags_ros)/launch/apriltag_detector_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="local" value="$(arg /apriltags/local)"/>
@@ -413,19 +415,24 @@
 
 		<!-- Detection -->
 		<group if="$(arg /LED/detector)">
-			<include file="$(find led_detection)/launch/LED_detection.launch">
+                                             <remap from="LED_detector_node_gazebo/tag"  to="$(arg veh)/apriltags_postprocessing_node/apriltags_out"/>
+                                             <remap from="traffic_light/raw_led_trafficlight" to="traffic_light_node_gazebo/raw_led_trafficlight"/>
+                                             <remap from="LED_detector_node_gazebo/raw_led_detection" to="$(arg veh)/LED_detector_node_gazebo/raw_led_detection" />
+			<include file="$(find led_detection)/launch/LED_detection_gazebo.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>        +++++++++++++ 
 			</include>
 		</group>
 
-        <!--remap from="led_joy_mapper_node/change_color_pattern" to="led_emitter_node/change_color_pattern" /-->
+        <remap from="led_joy_mapper_node/change_color_pattern" to="led_emitter_node/change_color_pattern" />
 		<group if="$(arg /LED/joystick)">
-			<include file="$(find led_joy_mapper)/launch/led_joy_mapper_node.launch">
+			<include file="$(find led_joy_mapper)/launch/led_joy_mapper_node_gazebo.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>
 			</include>
 		</group>
 		
@@ -435,26 +442,33 @@
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>
 			</include>    
 		</group>
         
 		<group if="$(arg /LED/emitter)">
-			<include file="$(find led_emitter)/launch/led_emitter_node.launch">
+                              <remap from="led_emitter_node/tag"  to="apriltags_postprocessing_node/apriltags_out"/>
+			<include file="$(find led_emitter)/launch/led_emitter_node_gazebo.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="true"/>
 
 			</include>
 		</group>
 
 		<!-- TODO do we need some remappings here? -->
-		<remap from="LED_interpreter_node/raw_led_detection" to="LED_detector_node/raw_led_detection" />
+		<remap from="LED_interpreter_node/raw_led_detection" to="LED_detector_node_gazebo/raw_led_detection" />
+		<remap from="LED_interpreter_node/node_plan" to="actions_dispatcher_node/node_plan" />
+                              <remap from="LED_interpreter_node/tag"  to="apriltags_postprocessing_node/apriltags_out"/>
 		<group if="$(arg /LED/interpreter)">
-			<include file="$(find led_interpreter)/launch/LED_interpreter.launch">
+			<include file="$(find led_interpreter)/launch/LED_interpreter_gazebo.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="config" value="$(arg config)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
 				<arg name="intersectionType" value="$(arg intersectionType)" />
+				<arg name="local" value="true"/>
+				
 			</include>
 		</group>
 		
@@ -500,10 +514,13 @@
 	<group if="$(arg coordination)">
 		<!-- Vehicle Coordinator-->
 		<remap from="simple_coordinator_node/mode" to="fsm_node/mode" />
-		<remap from="simple_coordinator_node/signals_detection" to="LED_interpreter_node/signals_detection" />
+		<remap from="simple_coordinator_node/tag"  to="apriltags_postprocessing_node/apriltags_out"/>
+                              <remap from="simple_coordinator_node/signals_detection" to="LED_interpreter_node/signals_detection" /> +++++++++++++++++++ 
+		<!--remap from="simple_coordinator_node/signals_detection" to="fake_duckiebot_node/signals_detection" /-->+++++++++++++++++++fake
+		<remap from="simple_coordinator_node/node_plan" to="actions_dispatcher_node/node_plan" />
 		<!--the following remap is done through led_patter_switch_node -->
         <!--remap from="simple_coordinator_node/change_color_pattern" to="led_emitter_node/change_color_pattern" /-->
-		<include file="$(find veh_coordinator)/launch/simple_coordinator_node.launch">
+		<include file="$(find veh_coordinator)/launch/simple_coordinator_node_gazebo.launch">
 			<arg name="veh" value="$(arg veh)"/>        
 			<arg name="config" value="$(arg config)"/>        
 			<arg name="param_file_name" value="$(arg param_file_name)"/>  
@@ -548,7 +565,7 @@
 			<!-- random april tags -->
 			<remap from="sr_turns_node/mode" to="fsm_node/mode"/>
 			<remap from="sr_turns_node/turn_type" to="open_loop_intersection_control_node/turn_type"/> <!-- remapping outputs since there are two different possible turn types -->
-
+coo
 			<include file="$(find navigation)/launch/sr_turns_node.launch">
 				<arg name="veh" value="$(arg veh)"/>        
 				<arg name="config" value="$(arg config)"/>        

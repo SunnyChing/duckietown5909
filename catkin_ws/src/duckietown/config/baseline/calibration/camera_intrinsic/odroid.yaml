@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: odroid/camera_node
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [524.667864, 0.000000, 300.928456, 0.000000, 526.750646, 278.646774, 0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.473014, 0.245649, -0.008109, 0.001567, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [425.312714, 0.000000, 295.504518, 0.000000, 0.000000, 468.083313, 283.265101, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]

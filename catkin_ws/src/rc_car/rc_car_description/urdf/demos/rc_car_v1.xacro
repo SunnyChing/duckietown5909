@@ -5,33 +5,37 @@
 	<xacro:property name="chassisHeight" value="0.0365"/>
 	<xacro:property name="chassisLength" value="0.17"/>
 	<xacro:property name="chassisWidth" value="0.075"/>
-	<xacro:property name="chassisMass" value="0.38"/><!--unit:kg-->
+	<xacro:property name="chassisMass" value="0.28"/><!--unit:kg-->
 
-	<xacro:property name="casterRadius" value="0.027"/>
-	<xacro:property name="casterMass" value="0.001"/>
-
+	<xacro:property name="casterRadius" value="0.017"/>
+	<xacro:property name="casterMass" value="0.028"/>
+<!--too light so slip-->
 	<xacro:property name="wheelWidth" value="0.026"/>
 	<xacro:property name="wheelRadius" value="0.035"/>
 	<xacro:property name="wheelPos" value="0.06"/>  <!--distance between head-->
-	<xacro:property name="wheelMass" value="0.06"/>
+	<xacro:property name="wheelMass" value="0.035"/>
 
 	<xacro:property name="cameraSize" value="0.023"/>
 	<xacro:property name="cameraMass" value="0.03"/>
-	<xacro:include filename="$(find rc_car_description)/urdf/rc_car_v1.gazebo" />
-	<xacro:include filename="$(find rc_car_description)/urdf/materials.xacro" />
-	<xacro:include filename="$(find rc_car_description)/urdf/macros_v1.xacro" />
+	<xacro:include filename="$(find rc_car_description)/urdf/demos/rc_car_v1.gazebo" />
+	<xacro:include filename="$(find rc_car_description)/urdf/demos/materials.xacro" />
+	<xacro:include filename="$(find rc_car_description)/urdf/demos/macros_v1.xacro" />
 
 <link name='chassis'>
   <collision> 
     <origin xyz="0 0 0.054" rpy="0 0 0"/> 
     <geometry> 
-      <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/> 
+   
+     <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/> 
+ 
     </geometry> 
   </collision>
   <visual> 
     <origin xyz="0 0 0.03" rpy="0 0 3.14"/> 
     <geometry>
-      <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/> 
+  
+<mesh filename="package://rc_car_description/meshes/duckiebot.dae"/>
+    <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/> 
     </geometry> 
   </visual>
   <inertial> 
@@ -70,6 +74,18 @@
     <geometry>
       <sphere radius="${casterRadius}"/>
     </geometry>
+  <surface>
+            <friction>
+              <ode>
+                <mu>100</mu><!-- Gazebo will choose the smallest '''mu''' and '''mu2''' from the two colliding objects.-->
+                <mu2>50</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
   </collision>
   
   <visual>

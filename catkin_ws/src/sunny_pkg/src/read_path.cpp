@@ -74,18 +74,18 @@ void get_tragectory(bool b){
   double temx,temy,tempphi;
   std::string headline;
   mypathl.header.frame_id="gzbbot/odom1";
-  mypathr.header.frame_id="map";
+  mypathr.header.frame_id="world";
   std::vector<geometry_msgs::PoseStamped> plan, plan1;
   geometry_msgs::PoseStamped tempose;
 
     std::ifstream myfile,myfile1;
     ROS_INFO("already open");
-    myfile.open("/home/room5909/catkin_ws/src/barc/basement2.txt",std::ios::in);
+    myfile.open("/home/room5909/duckietown/catkin_ws/src/barc/track1.txt",std::ios::in);
     if(myfile.is_open()){
             ROS_INFO("openl");
             getline(myfile,headline);
 
-            while (myfile>>temx>>temy>>tempphi){
+            while (myfile>>temx>>temy){
               tempose.pose.position.x=temx;
               tempose.pose.position.y=temy;
               plan.push_back(tempose);

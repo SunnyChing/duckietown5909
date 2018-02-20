@@ -31,7 +31,7 @@ class GraphSearchProblem(object):
 		expanded = set([self.start])
 		while q:
 			search_node = q.pop()   #last one
-			print search_node
+			#print search_node
 			if self.test_goal(search_node.state):
 				return Path(search_node)
 			expanded.add(search_node)   

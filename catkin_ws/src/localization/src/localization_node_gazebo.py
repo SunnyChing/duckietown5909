@@ -22,8 +22,8 @@ class LocalizationNode(object):
         self.veh_name = rospy.get_param('~veh')
         # Constants
         self.world_frame = "world"
-        self.duckiebot_frame = self.veh_name +"/base_footprint"
-        #self.duckiebot_frame = "duckiebot"
+        #self.duckiebot_frame = self.veh_name +"/base_footprint"
+        self.duckiebot_frame = self.veh_name+ "/duckiebot"
 
         self.duckiebot_lifetime = self.setupParam("~duckiebot_lifetime", 5) # The number of seconds to keep the duckiebot alive bewtween detections
         self.highlight_lifetime = self.setupParam("~highlight_lifetime", 3) # The number of seconds to keep a sign highlighted after a detection

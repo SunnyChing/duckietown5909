@@ -50,7 +50,7 @@ class LEDInterpreterNode(object):
 		self.sub_LEDs = rospy.Subscriber("~raw_led_detection", LEDDetectionArray, self.Interpreter, queue_size = 1)
 		#self.switch = rospy.Subscriber("~mode", FSMState, self.seeSwitch)
 		#rospy.Subscriber('~intersectionType_', BoolStamped, lambda msg: self.set('trafficLightIntersection', msg.data))
-		rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('trafficLightIntersection', 'isSetIntersection',msg.nodes.pop(0),True))
+		rospy.Subscriber('~node_plan', IntersectionNodeArray, self.cbNodePlan, queue_size=1 )
 		self.sub_topic_tag = rospy.Subscriber("~tag", AprilTagsWithInfos, self.cbTag, queue_size=1)
 		self.trafficLightNode = {52,49,53,51,71,78,70,72}
 		self.isSetIntersection = False
@@ -98,7 +98,7 @@ class LEDInterpreterNode(object):
 			#print(self.trafficLightIntersection)
 			if self.trafficLightIntersection:
 				for item in msg.detections:
-					#rospy.loginfo("[%s]:\n pixel = %f\n top bound = %f\n measured frequence=%f\n go frequency =%f" %(self.node_name, item.pixels_normalized.y,self.label['top'],item.frequency,self.lightGo))
+					rospy.loginfo("[%s]:\n pixel = %f\n top bound = %f\n measured frequence=%f\n go frequency =%f" %(self.node_name, item.pixels_normalized.y,self.label['top'],item.frequency,self.lightGo))
 					if item.pixels_normalized.y < self.label['top']:
 						if abs(item.frequency - self.lightGo) < 0.1:
 							self.traffic_light_state = SignalsDetection.GO
@@ -110,7 +110,7 @@ class LEDInterpreterNode(object):
 			#case with stop sign intersection	
 			else:
 				for item in msg.detections:
-					#rospy.loginfo("[%s]:\n pixel = %f\n right bound = %f\n left bound =%f\n measured frequence=%f\n" %(self.node_name, item.pixels_normalized.x,self.label['right'],self.label['left'],item.frequency))
+					rospy.loginfo("[%s]:\n pixel = %f\n right bound = %f\n left bound =%f\n measured frequence=%f\n" %(self.node_name, item.pixels_normalized.x,self.label['right'],self.label['left'],item.frequency))
 					#check if front vehicle detection
 					if item.pixels_normalized.x < self.label['right'] and item.pixels_normalized.y > self.label['top']:
 						#check signal of that vehicle
@@ -159,7 +159,14 @@ class LEDInterpreterNode(object):
  				self.trafficLightIntersection = False
 			self.isSetIntersection = True
 			#print(self.isSetIntersection)
-
+  	def cbNodePlan(self, node_plan):
+		if node_plan.nodes !=[]:
+ 			if node_plan.nodes.pop(0) == 'True':
+				self.trafficLightIntersection = True
+ 			else:                
+				self.trafficLightIntersection = False
+			self.isSetIntersection = True
+ 			print(str(self.trafficLightIntersection) + 'led_interpreter')
 
 
 if __name__ == '__main__':

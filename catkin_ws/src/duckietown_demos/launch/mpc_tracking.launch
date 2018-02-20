@@ -40,4 +40,11 @@
    <!--include file="$(find dagu_car)/launch/wheels_driver_node.launch">
         <arg name="veh" value="$(arg veh)"/>
     </include-->
+		<!-- duckietown_description -->
+		<include file="$(find duckietown_description)/launch/duckietown_description_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="gui" value="true"/>
+			<arg name="map_name" value="lab5916_map"/>
+		</include>
+
 </launch>

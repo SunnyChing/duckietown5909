@@ -90,10 +90,10 @@ int main( int argc, char** argv )
 	points.points.push_back(p);
        line_strip.points.push_back(p);
 	 
-    marker_pub.publish(points);
-    marker_pub.publish(line_strip);
+    //marker_pub.publish(points);
+    pathpub.publish(line_strip);
     //marker_pub.publish(line_list);
-
+_
     r.sleep();
 
     //f += 0.04;

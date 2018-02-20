@@ -5,8 +5,9 @@ import sys
 import time
 from std_msgs.msg import Float32, Int8, String
 from duckietown_msgs.msg import BoolStamped, GazeboLED,AprilTagsWithInfos
-
-
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
+from visualization_msgs.msg import Marker
+from nav_msgs.msg import Odometry
 class LEDEmitter(object):
     def __init__(self):
         self.node_name = rospy.get_name()
@@ -15,6 +16,8 @@ class LEDEmitter(object):
         self.pub_pattern = rospy.Publisher("~emit_color_pattern",GazeboLED,queue_size=1)
         self.sub_switch = rospy.Subscriber("~switch",BoolStamped,self.cbSwitch)
         self.sub_topic_tag = rospy.Subscriber("~tag", AprilTagsWithInfos, self.cbTag, queue_size=1)
+        self.sub_odom = rospy.Subscriber("odom", Odometry, self.cbOdom, queue_size=1)
+        self.pub_state = rospy.Publisher("cstate", Marker, queue_size=1)
         self.cycle = None
         self.pattern = GazeboLED()
         self.is_on = False
@@ -72,8 +75,11 @@ class LEDEmitter(object):
     def cbTag(self, tag_msgs):
             #loop through list of april tags
         self.tags_id_seen=[]
-        for taginfo in tag_msgs.infos:
-           # rospy.loginfo("[%s] taginfo." %(taginfo))
+        for taginfo in tag_msgs.detections:
+            # rospy.loginfo("[%s] taginfo." %(taginfo))
+            #print(self.get_rotation(taginfo.pose))
+            if self.get_rotation(taginfo.pose) >0.3 or self.get_rotation(taginfo.pose) <-0.3 or taginfo.pose.pose.position.x >0.7:
+                return
             self.tags_id_seen.append(str(taginfo.id))
            
         if len([x for x in self.tags_id_seen if x in self.cross_dict['1'] ])!= 0:
@@ -109,7 +115,33 @@ class LEDEmitter(object):
         if True:
             self.pub_pattern.publish(self.pattern)
             #rospy.loginfo("%s in %s." %(self.pattern.car,self.pattern.color))
+            text = Marker()
+            text.header.frame_id = "/world"
+            text.header.stamp = rospy.Time.now()
+            text.ns =  self.veh_name
+            text.id = 1
+            text.type = 9	# text
+            text.action = 0
+            text.pose.position.x = self.x + 0.2
+            text.pose.position.y = self.y + 0.2
+            text.pose.position.z = 0.0
+            text.pose.orientation.w = 1.0
+            text.scale.z = 0.08
+            text.color.r = 1.0		# red
+            text.color.g = 1.0
+            text.color.b = 0.0
+            text.color.a = 1.0
+            text.text = str(self.pattern.color) 
+            self.pub_state.publish(text)
+    def cbOdom(self,odo):
+        self.x = odo.pose.pose.position.x
+        self.y = odo.pose.pose.position.y
 
+    def get_rotation (self, msg):
+        orientation_q = msg.pose.orientation
+        orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
+        (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
+        return yaw
 
 if __name__ == '__main__':
     rospy.init_node('led_emitter',anonymous=False)

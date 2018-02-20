@@ -54,7 +54,7 @@ class VehicleCoordinator():
         self.right_veh = UNKNOWN
         self.opposite_veh = UNKNOWN
         rospy.Subscriber('~signals_detection', SignalsDetection, self.process_signals_detection)
-        rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('traffic_light_intersection', msg.nodes.pop(0)))
+        rospy.Subscriber('~node_plan', IntersectionNodeArray, self.cbNodePlan, queue_size=1)
 
         # Publishing
         self.clearance_to_go = CoordinationClearance.NA
@@ -180,6 +180,16 @@ class VehicleCoordinator():
         elif self.state == State.TL_SENSING:
             if self.traffic_light == SignalsDetection.GO:
                 self.set_state(State.GO)
+        elif self.mode == 'JOYSTICK_CONTROL':
+            self.set_state(State.LANE_FOLLOWING)
+    def cbNodePlan(self, node_plan):
+        if node_plan.nodes !=[]:
+             if node_plan.nodes.pop(0) == 'True':
+                    self.traffic_light_intersection = True
+             else:                
+                    self.traffic_light_intersection = False
+             self.isSetIntersection = True
+             print(self.traffic_light_intersection )
 
 if __name__ == '__main__':
     car = VehicleCoordinator()

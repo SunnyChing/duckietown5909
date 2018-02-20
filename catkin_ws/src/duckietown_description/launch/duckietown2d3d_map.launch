@@ -15,8 +15,8 @@
         <remap from="robot_description" to="map_description" />
     </node>
 
-      <!--arg name="map" default="$(find duckietown_description)/map/lab5916_1226_gmapping_110_racecar.yaml"/>
-      <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" /-->
+      <arg name="map" default="$(find duckietown_description)/map/lab5916_1226_gmapping_110_racecar.yaml"/>
+      <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" />
 
-  <!--node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_base_footprint"  args="2.9 5 -0.3  -3.2 0.0 0.0  /map /world" /-->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_base_footprint"  args="2.9 5 -0.3  -3.2 0.0 0.0  /map /world" />
 </launch>

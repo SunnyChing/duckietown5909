@@ -862,8 +862,6 @@ Visualization Manager:
         All Enabled: false
         gzbbot/base_footprint:
           Value: false
-        gzbbot/base_footprint1:
-          Value: true
         gzbbot/base_link:
           Value: true
         gzbbot/camera_link:
@@ -871,6 +869,10 @@ Visualization Manager:
         gzbbot/caster_wheel_back:
           Value: false
         gzbbot/chassis:
+          Value: false
+        gzbbot/duckiebot:
+          Value: false
+        gzbbot/gzbbot_camera_link:
           Value: false
         gzbbot/left_wheel:
           Value: false
@@ -1156,8 +1158,6 @@ Visualization Manager:
           Value: false
         tingbot/base_footprint:
           Value: false
-        tingbot/base_footprint1:
-          Value: true
         tingbot/base_link:
           Value: true
         tingbot/camera_link:
@@ -1166,25 +1166,53 @@ Visualization Manager:
           Value: false
         tingbot/chassis:
           Value: false
+        tingbot/duckiebot:
+          Value: false
         tingbot/left_wheel:
           Value: false
         tingbot/odom1:
-          Value: true
+          Value: false
         tingbot/right_wheel:
           Value: false
         tingbot/tingbot_camera_link:
+          Value: false
+        viewed_tag_12:
           Value: true
-        viewed_tag_117:
+        viewed_tag_123:
+          Value: true
+        viewed_tag_18:
+          Value: true
+        viewed_tag_19:
+          Value: true
+        viewed_tag_22:
+          Value: true
+        viewed_tag_24:
           Value: true
         viewed_tag_25:
           Value: true
-        viewed_tag_49:
+        viewed_tag_31:
           Value: true
-        viewed_tag_52:
+        viewed_tag_35:
           Value: true
-        viewed_tag_71:
+        viewed_tag_36:
           Value: true
-        viewed_tag_72:
+        viewed_tag_39:
+          Value: true
+        viewed_tag_4:
+          Value: true
+        viewed_tag_41:
+          Value: true
+        viewed_tag_58:
+          Value: true
+        viewed_tag_60:
+          Value: true
+        viewed_tag_61:
+          Value: true
+        viewed_tag_65:
+          Value: true
+        viewed_tag_67:
+          Value: true
+        viewed_tag_68:
           Value: true
         world:
           Value: true
@@ -1195,9 +1223,20 @@ Visualization Manager:
       Show Names: true
       Tree:
         world:
+          gzbbot/duckiebot:
+            {}
           gzbbot/odom1:
-            gzbbot/base_footprint1:
-              {}
+            gzbbot/base_footprint:
+              gzbbot/base_link:
+                gzbbot/chassis:
+                  gzbbot/camera_link:
+                    {}
+                  gzbbot/caster_wheel_back:
+                    {}
+                  gzbbot/left_wheel:
+                    {}
+                  gzbbot/right_wheel:
+                    {}
           tile_0_0:
             tag_5:
               {}
@@ -1422,20 +1461,20 @@ Visualization Manager:
           tile_6_9:
             tag_116:
               {}
-          tingbot/base_footprint:
-            tingbot/base_link:
-              tingbot/chassis:
-                tingbot/camera_link:
-                  {}
-                tingbot/caster_wheel_back:
-                  {}
-                tingbot/left_wheel:
-                  {}
-                tingbot/right_wheel:
-                  {}
+          tingbot/duckiebot:
+            {}
           tingbot/odom1:
-            tingbot/base_footprint1:
-              {}
+            tingbot/base_footprint:
+              tingbot/base_link:
+                tingbot/chassis:
+                  tingbot/camera_link:
+                    {}
+                  tingbot/caster_wheel_back:
+                    {}
+                  tingbot/left_wheel:
+                    {}
+                  tingbot/right_wheel:
+                    {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -1462,7 +1501,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.46964
+      Distance: 9.486
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1

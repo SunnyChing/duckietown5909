@@ -4,7 +4,7 @@
   <arg name="rviz" default="false"/>
   <!-- start world --> 
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-     <arg name="world_name" value="$(find rc_car_gazebo)/world/lab5916_map.world"/>
+     <arg name="world_name" value="$(find rc_car_gazebo)/world/lab5916_map_3bound_real.world"/>
 	<!--arg name="world_name" value="$(find rc_car_gazebo)/world/loop.world"/-->
   </include>
  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find rc_car_description)/duck.rviz"/>
@@ -12,7 +12,7 @@
   <group ns="$(arg veh)">
     <param name="tf_prefix" value="$(arg veh)" />
     <include file="$(find rc_car_description)/launch/duck.launch" >
-      <arg name="init_pose" value="-x 0 -y 0 -z 0" />
+      <arg name="init_pose" value="-x 0 -y 2 -z 0 -R 0 -P 0 -Y 3.14" />
       <arg name="robot_name"  value="$(arg veh)" />
     </include>
     <!--node name="rc_car_odomCH" pkg="rc_car_control" type="rc_car_odomCH" /--> 
@@ -33,4 +33,11 @@
       <arg name="right_wheel"  value="right_wheel" />
   </plugin>
 </gazebo>-->
+ <include file="$(find duckietown_description)/launch/duckietown2d3d_map.launch" >
+      <arg name="veh" value="$(arg veh)" />
+    </include>
+
+  
+  <node pkg="tf" type="static_transform_publisher" name="world_to_$(arg veh)odom_broadcaster"
+    args="0 0 0 0 0 0 /world /$(arg veh)/odom1  100"/>
 </launch>

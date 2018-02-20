@@ -1,0 +1,19 @@
+<launch>
+    <!-- SYSTEM MODEL -->
+    <!-- vehicle parameters -->
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="true" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+    <!-- HIGH LEVEL CONTROLLER -->
+    <node  ns="$(arg veh)" pkg="sunny_pkg" type="euler_pose.py" name="qt2eul" output="screen"/>
+    <include file="$(find duckietown_demos)/launch/mpc_tracking.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+   </include>
+    <node  ns="$(arg veh)" pkg="barc" type="parking_mpc_2.jl" name="MPC" output="screen"/>
+    <node  ns="$(arg veh)" pkg="sunny_pkg" type="drawparkspace.py" name="show_park" output="screen"/>
+    <!--node  ns="$(arg veh)" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_kb" output="screen"/-->
+</launch>

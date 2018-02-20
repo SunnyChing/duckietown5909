@@ -49,7 +49,7 @@ class LEDInterpreterNode(object):
 		self.sub_LEDs = rospy.Subscriber("~raw_led_detection", LEDDetectionArray, self.Interpreter, queue_size = 1)
 		#self.switch = rospy.Subscriber("~mode", FSMState, self.seeSwitch)
 		#rospy.Subscriber('~intersectionType_', BoolStamped, lambda msg: self.set('trafficLightIntersection', msg.data))
-		rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('trafficLightIntersection', msg.nodes.pop(0)))
+		rospy.Subscriber('~node_plan', IntersectionNodeArray, self.cbNodePlan, queue_size=1 )
 		rospy.loginfo("Initialized.")
 
 		#while not rospy.is_shutdown():
@@ -112,7 +112,8 @@ class LEDInterpreterNode(object):
 					for i in range(len(self.signalFrequencies)):
 						if abs(self.signalFrequencies[i] - detected_freq) < 0.1:
 							self.front = self.vehicleSignals[i]
-							break
+					g on exit
+[gzbbot/gzbbot_state_publisher-6] killing on e		break
 
 				#check if right vehicle detection
 				if item.pixels_normalized.x > self.label['right'] and item.pixels_normalized.y > self.label['top']:
@@ -144,6 +145,15 @@ class LEDInterpreterNode(object):
 
 	def onShutdown(self):
 		    rospy.loginfo("[LED Interpreter] Shutdown.")
+
+  	def cbNodePlan(self, node_plan):
+		if node_plan.nodes !=[]:
+ 			if node_plan.nodes.pop(0) == 'True':
+				self.trafficLightIntersection = True
+ 			else:                
+				self.trafficLightIntersection = False
+			self.isSetIntersection = True
+ 			#print(self.trafficLightIntersection)
 
 if __name__ == '__main__':
    # rospy.init_node('virtual_mirror_qlai_tester',anonymous=False)

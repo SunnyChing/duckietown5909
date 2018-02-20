@@ -10,9 +10,9 @@
         <arg name="visualization" value="false" />
 
         <arg name="navigation" value="true"/>TypeError: 'NoneType' object has no attribute '__getitem__'
-        <arg name="/navigation/apriltags_random" default="true"/>      if random walk +true
+        <arg name="/navigation/apriltags_random" default="false"/>      if random walk +true
         <arg name="/navigation/random_sr_turns" default="false"/>		-false
-        <arg name="/navigation/graph_planner" default="false"/>		-false
+        <arg name="/navigation/graph_planner" default="true"/>		-false
 
         <arg name="/camera/local" value="true"/>  
         <arg name="/camera/raw" value="true"/>

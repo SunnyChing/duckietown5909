@@ -433,7 +433,7 @@
 
 		<!-- TODO do we need some remappings here? -->
 		<remap from="LED_interpreter_node/raw_led_detection" to="LED_detector_node/raw_led_detection" />
-		<remap from="LED_interpreter_node/node_plan" to="action_dispatcher_node/intersectionType" />
+		<remap from="LED_interpreter_node/node_plan" to="actions_dispatcher_node/node_plan" />
 		<group if="$(arg /LED/interpreter)">
 			<include file="$(find led_interpreter)/launch/LED_interpreter.launch">
 				<arg name="veh" value="$(arg veh)"/>
@@ -486,7 +486,8 @@
 		<!-- Vehicle Coordinator-->
 		<remap from="simple_coordinator_node/mode" to="fsm_node/mode" />
 		<remap from="simple_coordinator_node/signals_detection" to="LED_interpreter_node/signals_detection" />
-		<remap from="simple_coordinator_node/intersectionType" to="action_dispatcher_node/intersectionType" />
+		<remap from="simple_coordinator_node/node_plan" to="actions_dispatcher_node/node_plan" />
+
 		<!--the following remap is done through led_patter_switch_node -->
         <!--remap from="simple_coordinator_node/change_color_pattern" to="led_emitter_node/change_color_pattern" /-->
 		<include file="$(find veh_coordinator)/launch/simple_coordinator_node.launch">

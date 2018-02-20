@@ -56,7 +56,7 @@ class VehicleCoordinator():
         self.opposite_veh = UNKNOWN
         self.isSetIntersection = False
         rospy.Subscriber('~signals_detection', SignalsDetection, self.process_signals_detection)
-        rospy.Subscriber('~node_plan', IntersectionNodeArray, lambda msg: self.set('traffic_light_intersection', msg.nodes.pop(0)))
+        rospy.Subscriber('~node_plan', IntersectionNodeArray, self.cbNodePlan, queue_size=1)
         self.sub_topic_tag = rospy.Subscriber("~tag", AprilTagsWithInfos, self.cbTag, queue_size=1)
         self.trafficLightNode = {52,49,53,51,71,78,70,72}
         # Publishing
@@ -197,7 +197,16 @@ class VehicleCoordinator():
                  else:                
                     self.traffic_light_intersection = False
         self.isSetIntersection = True
-                # print(self.traffic_light_intersection)
+        #print(self.traffic_light_intersection)
+
+    def cbNodePlan(self, node_plan):
+        if node_plan.nodes !=[]:
+             if node_plan.nodes.pop(0) == 'True':
+                    self.traffic_light_intersection = True
+             else:                
+                    self.traffic_light_intersection = False
+             self.isSetIntersection = True
+             #print(self.traffic_light_intersection )
 
 if __name__ == '__main__':
     car = VehicleCoordinator()

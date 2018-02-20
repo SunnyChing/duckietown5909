@@ -5,7 +5,7 @@
   <arg name="rviz" default="true"/>
   <!-- start world --> 
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-     <arg name="world_name" value="$(find rc_car_gazebo)/world/lab5916_map.world"/>
+     <arg name="world_name" value="$(find rc_car_gazebo)/world//lab5916_map_3bound_real.world"/>
 	<!--arg name="world_name" value="$(find rc_car_gazebo)/world/loop.world"/-->
   </include>
  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find rc_car_description)/duck.rviz"/>

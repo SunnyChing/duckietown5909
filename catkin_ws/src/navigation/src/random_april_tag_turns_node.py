@@ -3,7 +3,7 @@ import rospy
 import numpy
 from duckietown_msgs.msg import FSMState, AprilTagsWithInfos, BoolStamped
 from std_msgs.msg import String, Int16 #Imports msg
-
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 class RandomAprilTagTurnsNode(object):
     def __init__(self):
         # Save the name of the node
@@ -37,12 +37,16 @@ class RandomAprilTagTurnsNode(object):
         if(self.fsm_mode != mode_msg.INTERSECTION_CONTROL):
             self.turn_type = -1
             self.pub_turn_type.publish(self.turn_type)
-            rospy.loginfo("Turn type now: %i" %(self.turn_type))
+            #rospy.loginfo("Turn type now: %i" %(self.turn_type))
             
     def cbTag(self, tag_msgs):
         if(self.fsm_mode == "INTERSECTION_CONTROL"):
             #loop through list of april tags
-            for taginfo in tag_msgs.infos:
+            for index,tag in enumerate(tag_msgs.detections):
+                if self.get_rotation(tag.pose) >0.4 or self.get_rotation(tag.pose) <-0.4 or tag.pose.pose.position.x >0.7:
+                    return
+                taginfo = tag_msgs.infos[index]
+
                 #print taginfo
                 #rospy.loginfo("[%s] taginfo." %(taginfo))
                 if(taginfo.tag_type == taginfo.SIGN):
@@ -58,13 +62,13 @@ class RandomAprilTagTurnsNode(object):
                     elif (signType == taginfo.T_INTERSECTION):
                         availableTurns = [0,2]
 
-                        #now randomly choose a possible direction
+                    #now randomly choose a possible direction
                     if(len(availableTurns)>0):
                         randomIndex = numpy.random.randint(len(availableTurns))
                         chosenTurn = availableTurns[randomIndex]
                         self.turn_type = chosenTurn
                         self.pub_turn_type.publish(self.turn_type)
-                        #rospy.loginfo("possible turns %s." %(availableTurns))
+                        rospy.loginfo("possible turns %s." %(availableTurns))
                         #rospy.loginfo("Turn type now: %i" %(self.turn_type))
 
     def setupParameter(self,param_name,default_value):
@@ -76,6 +80,11 @@ class RandomAprilTagTurnsNode(object):
     def on_shutdown(self):
         rospy.loginfo("[%s] Shutting down." %(self.node_name))
 
+    def get_rotation (self, msg):
+        orientation_q = msg.pose.orientation
+        orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
+        (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
+        return yaw
 if __name__ == '__main__':
     # Initialize the node with rospy
     rospy.init_node('random_april_tag_turns_node', anonymous=False)

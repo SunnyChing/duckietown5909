@@ -17,6 +17,6 @@
     </node>
 
     <node pkg="tf" type="static_transform_publisher" name="map_world" args="3.90 5.95 0 3.14 0 0 /world /map 100"/>
-    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+    <!--node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" /-->
 
 </launch>

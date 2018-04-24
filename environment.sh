@@ -5,11 +5,11 @@ source /opt/ros/indigo/setup.bash
 echo "...done."
 
 echo "Setting up PYTHONPATH."
-export PYTHONPATH=/home/ubuntu/duckietown/catkin_ws/src:$PYTHONPATH
+export PYTHONPATH=/home/ubuntu/duckietown_old/catkin_ws/src:$PYTHONPATH
 
 echo "Setup ROS_HOSTNAME."
 export ROS_HOSTNAME=$HOSTNAME.local
-export DUCKIETOWN_ROOT=$HOME/duckietown
+export DUCKIETOWN_ROOT=$HOME/duckietown_old
 
 echo "Building machines file..."
 make -C  $DUCKIETOWN_ROOT
